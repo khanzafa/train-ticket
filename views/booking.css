@@ -1,0 +1,437 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Roboto+Slab:wght@900&display=swap");
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+
+
+    --primary: whitesmoke;
+    --blue: #14b0ee;
+}
+
+header {
+    z-index: 999;
+    position: fixed;
+    background-color: transparent;
+    top: 0;
+    left: 0;
+    padding: 0 100px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header .logo {
+    line-height: 68px;
+    float: left;
+}
+
+header .logo a {
+    text-decoration: none;
+    font-family: "Roboto Slab", serif;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    font-size: 20px;
+}
+
+header .menu-section {
+    position: fixed;
+    width: 50%;
+    top: 5%;
+    right: 7%;
+    transform: translateY(-30%);
+    z-index: 20;
+    padding: 1em;
+    display: flex;
+    justify-content: end;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: whitesmoke;
+}
+
+header .menu-section ul li {
+    float: left;
+    list-style: none;
+}
+
+header .menu-section ul li a{
+    float: left;
+    margin-left: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-family: "Nunito", sans-serif;
+    text-decoration: none;
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+header .menu-section ul li a:hover {
+    color: var(--blue);
+}
+
+header .menu-section .login-btn {
+    margin-left: 20px;
+}
+
+section {
+    padding: 100px 200px;
+}
+
+.promo-page {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background: #ffffff;
+}
+
+.promo-page .content {
+    z-index: 888;
+    width: 70%;
+    margin-top: 260px;
+    transform: translateY(-30%);
+    display: none;
+}
+
+.promo-page .content.active{
+    display: block;
+}
+
+.promo-page .content>* {
+    transform: translateY(80px);
+    opacity: 0;
+    animation: fadeUp 1s ease-out forwards;
+}
+
+.promo-page .content h1 {
+    font-size: 2.5rem;
+    font-family: "Roboto Slab", serif;
+    color: whitesmoke;
+}
+
+.promo-page .content p {
+    font-size: 1rem;
+    font-family: "Nunito", sans-serif;
+    margin: 1em 0 1em 0;
+    line-height: 20px;
+    font-weight: bold;
+    color: #91b3c3;
+}
+
+.promo-page .content p strong {
+    color: whitesmoke;
+}
+
+.promo-page .content button {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    padding: 1em 1.2em;
+    outline: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+.promo-page .content button a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.promo-page .content button:hover {
+    background-color: var(--blue);
+    color: #ffffff;
+    border: 2px solid var(--primary);
+}
+
+.promo-page .content h1:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.promo-page .content h1:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.promo-page .content h1:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.promo-page .content p {
+    animation-delay: 1s;
+}
+
+.promo-page .content button {
+    animation-delay: 1.2s;
+}
+
+.promo-page video{
+    z-index: 000;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(35%);
+}
+
+.slides-promo{
+    z-index: 888;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 150px;
+}
+
+.slides-promo .nav-btn{
+    width: 9px;
+    height: 9px;
+    background: rgb(255, 255, 255);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+    transition: 0.3s ease;
+}
+
+.slides-promo .nav-btn.active{
+    background: var(--blue);
+}
+
+.slides-promo .nav-btn:not(:last-child){
+    margin-right: 10px;
+}
+
+.slides-promo .nav-btn:hover{
+    transform: scale(1.2);
+}
+
+.video-promo{
+    position: absolute;
+    width: 100%;
+    clip-path: circle(0% at 0 50%);
+}
+
+.video-promo.active{
+    clip-path: circle(150% at 0 50%);
+    transition: 2s ease;
+    transition-property: clip-path;
+}
+
+.search-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.train-form {
+    position: relative;
+    width: 90%;
+    background: #fff;
+    -webkit-box-shadow: 0 10px 20px 0 rgba(53,64,90,.2);
+    box-shadow: 0 10px 20px 0 rgba(53,64,90,.2);
+    border-radius: 8px;
+    padding-bottom: 24px;
+    margin-top: -40px;
+    margin-bottom: 80px;
+}
+
+.train-form .header-form {
+    padding: 26px 48px 22px;
+    position: relative;
+}
+
+.train-form .header-form .icon {
+    border-radius: 50%;
+    background-color: var(--blue);
+    width: 30px;
+    height: 30px;
+    padding: 9px;
+    float: left;
+    margin-right: 10px;
+    font-size: 14px;
+    color: #fff;
+}
+
+.train-form .header-form h1{
+    font-family: "Nunito", sans-serif;
+    font-weight: 200px;
+}
+
+.form-group{
+    position: relative;
+    border-top: 1px solid #dee2ee;
+    border-bottom: 1px solid #dee2ee;
+    height: 80px;
+    background-color: #fff;
+}
+
+.form-group .form-component{
+    padding: 22px;
+    height: 100%;
+}
+
+.form-group .form-component label{
+    font-family: "Nunito", sans-serif;
+    font-size: 11px;
+    color: rgb(139, 139, 139);
+}
+
+.form-group .form-component .title .check label {
+    padding-left: 3px;
+    font-family: "Nunito", sans-serif;
+    font-size: 11px;
+    color: rgb(139, 139, 139);
+}
+
+.form-group .form-component .input-group{
+    margin-top: 5px;
+}
+
+.form-group .form-component .input-group input{
+    border: none;
+}
+
+.form-group .form-component .input-group input[type=date]{
+    font-family: "Nunito", sans-serif;
+    border: 0;
+    cursor: pointer;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #35405a;
+}
+
+.form-group .form-component .title .check input{
+    float: left;
+}
+
+.form-component.from{
+    float: left;
+    width: 20%;
+    padding-right: 15px;
+    border-right: 1px dashed #dee2ee;
+}
+
+.form-component.to{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-component.depart{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-component.return{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-component.passenger{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+}
+
+.train-form .form-component .input-group .btn button{
+    border: 0;
+}
+
+.train-form .form-component>.input-group>.btn {
+    margin-right: 5px;
+    font-size: 12px;
+    color: #000000;
+    display: inline-block;
+}
+
+.train-form .form-component>.input-group>.btn .fa-solid {
+    vertical-align: middle;
+}
+
+.train-form .form-component>.input-group>.icon {
+    margin-right: 5px;
+    font-size: 12px;
+    color: #0064d2;
+    display: inline-block;
+}
+
+.train-form .form-component>.input-group>.icon .fa-solid {
+    vertical-align: middle;
+}
+
+.train-form .form-component>.input-group .form-control {
+    width: 80%;
+    position: relative;
+    display: inline-block;
+}
+
+.train-form .form-component input {
+    line-height: normal;
+}
+
+.data-passenger{
+    display: none;
+}
+
+.train-form .footer-form{
+    padding-top: 24px;
+    padding-right: 48px;
+    padding-left: 525px;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+}
+
+.train-form .footer-form button{
+    display: inline-block;
+    background-color: var(--blue);
+    padding: 8px 19px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border-style: none;
+    border-color: #91b3c3;
+    font-family: "Nunito", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+@keyframes fadeUp {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}

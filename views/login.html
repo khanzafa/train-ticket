@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Register to TrainVenture</title>
+  <link rel="icon" href="./Assets/Icon.ico" type="image/png" />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./login.css">
+
+</head>
+
+<body>
+
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="Assets/videoplayback.webm" type="video/webm">
+    </video>
+  </div>
+
+  <div class="cont">
+    <div id="signin"  class="form sign-in">
+      <h2><img src="./Assets/Icon.ico" width="60" height="60" class="image-style"></h2>
+      <h2>Welcome to TrainVenture</h2>
+      <h2>Where Your Journey Begins!</h2>
+      <label>
+        <span>Email</span>
+        <input type="email" />
+      </label>
+      <label>
+        <span>Password</span>
+        <input type="password" />
+      </label>
+      <button type="button" class="submit">Sign In</button>
+    </div>
+
+    <div class="sub-cont">
+      <div class="img">
+        
+        <div class="img__text m--up">
+          <h2>New Here ?</h2>
+          <p>Start your journey with us by registering now!</p>
+        </div>
+        
+        <div class="img__text m--in">
+          <h2>Already Registered ?</h2>
+          <p>Explore destinations and plan your dream trip with us!</p>
+        </div>
+        
+        <div class="img__btn">
+          <span class="m--up">Sign Up</span>
+          <span class="m--in">Sign In</span>
+        </div>
+      </div>
+      
+      <div id="signup" class="form sign-up">
+        <h2><img src="./Assets/Icon.ico" width="60" height="60" class="image-style"></h2>
+        <h2>Discover the World with Us Now!</h2>
+
+        <div class="grid-container">
+          <div class="column">
+            <label>
+              <span>Name</span>
+              <input type="text" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" />
+            </label>
+          </div>
+          
+          <div class="column">
+            <label>
+              <span>Resident ID</span>
+              <input type="text" />
+            </label>
+            <label>
+              <span>Password</span>
+              <input type="password" />
+            </label>
+          </div>
+        </div>
+        <button type="button" class="submit">Sign Up</button>
+      </div>
+    </div>
+  </div>
+  <script src="./login.js"></script>
+
+</body>
+
+</html>
