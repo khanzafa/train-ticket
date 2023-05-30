@@ -238,6 +238,21 @@ section {
     align-items: center;
 }
 
+.z-index-999{
+    position: relative;
+    z-index: 9999;
+}
+
+.overlay-searchpage{
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 888;
+    background: rgb(0 0 0 / 70%);
+}
+
 .train-form {
     position: relative;
     width: 90%;
@@ -317,10 +332,6 @@ section {
     color: #35405a;
 }
 
-.form-group .form-component .title .check input{
-    float: left;
-}
-
 .form-component.from{
     float: left;
     width: 20%;
@@ -358,14 +369,27 @@ section {
     padding-left: 15px;
 }
 
+#counter{
+    text-align: center;
+}
+
 .train-form .form-component .input-group .btn button{
     border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.train-form .form-component .input-group .btn button.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.train-form .form-component .input-group .btn button i{
+    color: var(--blue);
 }
 
 .train-form .form-component>.input-group>.btn {
-    margin-right: 5px;
     font-size: 12px;
-    color: #000000;
     display: inline-block;
 }
 
@@ -392,10 +416,6 @@ section {
 
 .train-form .form-component input {
     line-height: normal;
-}
-
-.data-passenger{
-    display: none;
 }
 
 .train-form .footer-form{
