@@ -267,10 +267,6 @@ input {
   grid-gap: 40px;
 }
 
-.column {
-  padding: 10px;
-}
-
 @keyframes fadeUp {
   0% {
       transform: translateY(80px);
