@@ -72,6 +72,7 @@ input, button {
   background: #fff;
   transition: transform 1.2s ease-in-out;
 }
+
 .cont.s--signup .sub-cont {
   transform: translate3d(-640px, 0, 0);
 }
@@ -97,6 +98,7 @@ button {
   height: 100%;
   padding-top: 360px;
 }
+
 .img:before {
   content: "";
   position: absolute;
@@ -104,10 +106,11 @@ button {
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url("/train-ticket/public/images/bckpic.png");
+  background-image: url("../Assets/bckpic.png");
   background-size: cover;
   transition: transform 1.2s ease-in-out;
 }
+
 .img:after {
   content: "";
   position: absolute;
@@ -117,9 +120,11 @@ button {
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
 }
+
 .cont.s--signup .img:before {
   transform: translate3d(640px, 0, 0);
 }
+
 .img__text {
   z-index: 2;
   position: absolute;
@@ -131,24 +136,30 @@ button {
   color: #fff;
   transition: transform 1.2s ease-in-out;
 }
+
 .img__text h2 {
   margin-bottom: 10px;
   font-weight: bold;
 }
+
 .img__text p {
   font-size: 12px;
   line-height: 1.5;
   font-weight: normal;
 }
+
 .cont.s--signup .img__text.m--up {
   transform: translateX(520px);
 }
+
 .img__text.m--in {
   transform: translateX(-520px);
 }
+
 .cont.s--signup .img__text.m--in {
   transform: translateX(0);
 }
+
 .img__btn {
   overflow: hidden;
   z-index: 2;
@@ -162,6 +173,7 @@ button {
   font-size: 15px;
   cursor: pointer;
 }
+
 .img__btn:after {
   content: "";
   z-index: 2;
@@ -173,6 +185,7 @@ button {
   border: 2px solid #fff;
   border-radius: 30px;
 }
+
 .img__btn span {
   position: absolute;
   left: 0;
@@ -184,12 +197,15 @@ button {
   height: 100%;
   transition: transform 1.2s;
 }
+
 .img__btn span.m--in {
   transform: translateY(-72px);
 }
+
 .cont.s--signup .img__btn span.m--in {
   transform: translateY(0);
 }
+
 .cont.s--signup .img__btn span.m--up {
   transform: translateY(72px);
 }
