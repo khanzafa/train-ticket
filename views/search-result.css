@@ -1,0 +1,612 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Roboto+Slab:wght@900&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    display: grid;
+
+
+    --primary: whitesmoke;
+    --blue: #14b0ee;
+}
+
+.container{
+    width: 100%;
+}
+
+/*--- navbar ---*/
+a {
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase;
+    position: relative;
+    color: #333;
+    padding: 10px 0px;
+    letter-spacing: 1px;
+    font-size: 12.5px;
+}
+
+.menu {
+    z-index: 888;
+    background: #fff;
+    margin: auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100%;
+    text-align: center;
+    padding: 8px 2rem;
+    height: 70px;
+    font-family: 'Titillium Web', sans-serif;
+}
+.menu ol {
+    padding-left: 0px;
+}
+
+ol{
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+
+.logo {
+    float: left;
+    position: absolute;
+    top: 10px;
+    left: 2rem;
+    width: 60px;
+    height: 50px;
+}
+.search {
+    float: right;
+    position: absolute;
+    top: 25px;
+    right: 2rem;
+    stroke: #333;
+    width: 20px;
+    height: 20px;
+}
+.menu-item {
+    list-style-type: none;
+    display: inline;
+    position: relative;
+    margin: 15px;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.menu-item:before {
+    position: absolute;
+    content: "";
+    border-bottom: 3px solid #333;
+    overflow: hidden;
+    width: 0%;
+    left: 50%;
+    top: 40px;
+    transition: 0.2s ease-in-out 0.15s;
+}
+
+.menu-item:hover:before {
+    width: 100%;
+    left: 0%;
+    transition: 0.2s ease-in-out;
+}
+
+.sub-menu {
+    position: absolute;
+    left: 0%;
+    background: #fff;
+    font-family: 'Titillium Web', sans-serif;
+    padding: 0;
+    text-align: left;
+    box-shadow: 0px 4px 20px -5px rgba(0, 0, 0, 0.15);
+    max-height: 0;
+    width: 150px;
+    opacity: 0;
+    transition: 0.45s ease all 0.1s;
+    z-index: 0;
+    -webkit-transform: translateY(20px);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.1s;
+    visibility: hidden;
+}
+.menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu {
+    max-height: 200px;
+    max-width: 200px;
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    transform: translateY(0px);
+    opacity: 1;
+    transition-delay: 0.15s;
+    visibility: visible;
+}
+.sub-menu .menu-item {
+    display: block;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.menu-item:nth-child(n + 3):nth-child(-n + 4) .plus-icon {
+    width: 15px;
+    height: 15px;
+    stroke: #333;
+    margin-left: 2px;
+    margin-bottom: -5px;
+}
+
+.menu-item:nth-child(n + 3):nth-child(-n + 4) .sub-menu-item {
+    list-style-type: none;
+    display: block;
+    margin: 15px;
+    position: relative;
+    opacity: 0;
+    transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.1s;
+    visibility: hidden;
+}
+.menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu {
+    max-height: 200px;
+    max-width: 200px;
+    opacity: 1;
+}
+.menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu-item a {
+    transition: 0.15s ease all;
+}
+.menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu-item a:hover {
+    color: grey;
+}
+.menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu-item {
+    -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+    opacity: 1;
+    transition-delay: 0.15s;
+    visibility: visible;
+}
+
+.menu .logo img {
+    height: 50px;
+    width: 50px;
+}
+
+.menu .logo h1 {
+    display: inline;
+    position: relative;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+/*--- search result page ---*/
+.search-result-page{
+    display: block;
+    position: relative;
+}
+
+.search-preview{
+    position: relative;
+    background-color: #fff;
+    border-top: 1px solid #dee2ee;
+    border-bottom: 1px solid #dee2ee;
+    height: 96px;
+    padding: 0 15px;
+}
+
+.list-horizontal{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.content-preview{
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.preview-column{
+    position: relative;
+    height: 96px;
+    width: 80%;
+    border-right: 1px solid #dee2ee;
+    overflow: hidden;
+    display: flex;
+    flex: 1;
+    align-items: center;
+}
+
+.content-preview .preview-column .text-section .list-preview .list-horizontal .icon-line{
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #8a93a7;
+    margin: 0 10px;
+}
+.content-preview .preview-column .text-section{
+    font-family: 'Titillium Web', sans-serif;           
+}   
+
+.content-preview .preview-column .text-section .header-section{
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 0.8;
+}
+
+.content-preview .preview-column .text-section .list-preview{
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.train-icon{
+    background-color: var(--blue);
+    border: solid 1px var(--blue);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+    margin-right: 16px;
+    display: flex;
+}
+
+.train-icon i{
+    margin-left: 3px;
+    margin-top: 2px;
+    color: #ffffff;
+}
+
+.change-preview{
+    position: relative;
+    height: 96px;
+    width: 20%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.change-preview button {
+    padding: 13px 14px;
+    border: none;
+    border-radius: 24px;
+    background-color: #f7f7f7;
+    font-family: 'Titillium Web', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #0064d2;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.content-ticket{
+    display: flex;
+    align-items: center;
+    padding: 20px 40px;
+    background: rgba(182, 224, 241, 0.5);
+}
+
+.content-ticket .column-ticket{
+    width: 100%;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.content-ticket .column-ticket .head-ticket{
+    border: solid 1px black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    background-color: #ffffff;
+}
+
+.content-ticket .column-ticket .position{
+    width: 100%;
+}
+
+.column-ticket .position .train-name{
+    width: 25%;
+    padding-right: 25px;
+}
+
+.column-ticket .position .from-station{
+    width: 20%;
+}
+
+.column-ticket .position .duration{
+
+    width: 20%;
+}
+
+.column-ticket .position .to-station{
+    width: 20%;
+}
+
+.column-ticket .position .price{
+    width: 15%;
+}
+
+.content-ticket .column-ticket .available-ticket{
+    border: solid 1px black;
+    padding: 0 20px;
+    border-radius: 5px;
+    margin: 15px 0;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    line-height: 1.3;
+    background-color: #ffffff;
+}
+
+.content-ticket .column-ticket .sold-ticket{
+    border: solid 1px black;
+    padding: 0 20px;
+    border-radius: 5px;
+    margin: 15px 0;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    line-height: 1.3;
+    opacity: 0.5;
+    background-color: #ffffff;
+}
+
+/*------train name column-------*/
+.column-ticket .position .text-train-name{
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 1;
+    padding-bottom: 8px;
+}
+
+.column-ticket .position .text-train-class{
+    font-size: 15px;
+}
+
+/*------station column-------*/
+.column-ticket .position .text-station{
+    font-size: 19px;
+}
+
+.column-ticket .position .time-station{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.column-ticket .position .date-station{
+    font-size: 19px;
+}
+
+/*------duration column-------*/
+.column-ticket .position .line-duration{
+    font-size: 13px;
+    text-align: center;
+    border-bottom: solid 0.3px;
+}
+
+.column-ticket .position .train-icon{
+    width: 20px;
+    height: 20px;
+}
+
+/*------price column-------*/
+.column-ticket .position .price{
+    text-align: right;
+}
+
+.column-ticket .position .seat{
+    font-size: 12px;
+    line-height: 0.7;
+}
+
+.column-ticket .position .price-tag{
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.column-ticket .position .order-btn button{
+    border: none;
+    border-radius: 50px;
+    background: var(--blue);
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 10px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+.column-ticket .position .order-btn button:hover{
+    background: #2dbcf5;
+    color: #ffffff;
+    transition: 0.3 ease;
+}
+
+/*------sold column-------*/
+.column-ticket .position .text-sold{
+    font-size: 26px;
+    font-weight: bold;
+    padding-bottom: 13px;
+}
+
+.column-ticket .sold-ticket .position .order-btn button{
+    border: none;
+    border-radius: 50px;
+    background: #8a93a7;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 10px;
+    color: whitesmoke;
+    pointer-events: non;
+}
+
+/*------hidden div-------*/
+.search-change{
+    position: relative;
+    background-color: #fff;
+    border-top: 1px solid #dee2ee;
+    border-bottom: 1px solid #dee2ee;
+    height: 96px;
+    padding: 0 15px;
+}
+
+.train-form{
+    position: relative;
+    height: 96px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.train-form .form-group{
+    position: relative;
+    width: 90%;
+    height: 100%;
+}  
+
+.train-form .form-group .form-component{
+    padding: 22px;
+    height: 100%;
+}
+      
+
+.form-component.from{
+    float: left;
+    width: 20%;
+    padding-right: 15px;
+    border-right: 1px dashed #dee2ee;
+}
+
+.form-component.to{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-component.depart{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-component.return{
+    float: left;
+    width:20%;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-component.passenger{
+    float: left;
+    width: 20%;
+    padding-left: 15px;
+    border-right: 1px solid #dee2ee;
+}
+
+.form-group .form-component label{
+    font-family: "Nunito", sans-serif;
+    font-size: 11px;
+    color: rgb(139, 139, 139);
+}
+
+.form-group .form-component .title .check label {
+    padding-left: 3px;
+    font-family: "Nunito", sans-serif;
+    font-size: 11px;
+    color: rgb(139, 139, 139);
+}
+
+.form-group .form-component .input-group{
+    margin-top: 5px;
+}
+
+.form-group .form-component .input-group input{
+    border: none;
+}
+
+.form-group .form-component .input-group input[type=date]{
+    font-family: "Nunito", sans-serif;
+    border: 0;
+    cursor: pointer;
+    font-size: 11px;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: normal;
+    color: #35405a;
+}
+
+.train-form .form-component .input-group .btn button{
+    border: 0;
+    background: none;
+    cursor: pointer;
+}
+
+.train-form .form-component .input-group .btn button.disabled{
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.train-form .form-component .input-group .btn button i{
+    color: var(--blue);
+}
+
+.train-form .form-component>.input-group>.btn {
+    font-size: 12px;
+    display: inline-block;
+}
+
+.train-form .form-component>.input-group>.btn .fa-solid {
+    vertical-align: middle;
+}
+
+.train-form .form-component>.input-group>.icon {
+    margin-right: 5px;
+    font-size: 12px;
+    color: #0064d2;
+    display: inline-block;
+}
+
+.train-form .form-component>.input-group>.icon .fa-solid {
+    vertical-align: middle;
+}
+
+.train-form .form-component>.input-group .form-control {
+    width: 80%;
+    position: relative;
+    display: inline-block;
+}
+
+#counter{
+    text-align: center;
+}
+
+.footer-form{
+    position: relative;
+    width: 10%;
+    height: 96px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-form button {
+    padding: 13px 14px;
+    border: none;
+    font-size: 10px;
+    background-color: var(--blue);
+    border-radius: 50px;
+    border-style: none;
+    border-color: #91b3c3;
+    font-family: "Nunito", sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    text-transform: uppercase;
+    cursor: pointer;
+}
