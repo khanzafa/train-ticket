@@ -51,7 +51,7 @@ router.post('/login', async(req, res) => {
 
 /* Tampilan Register */
 router.get('/register', function(req, res, next){
-  res.render('register');
+  res.render('log');
 });
 /* Proses Register */
 router.post('/register', async (req, res)=>{
