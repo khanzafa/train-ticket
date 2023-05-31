@@ -288,6 +288,138 @@
             cursor: pointer;
         }
 
+        .content-ticket{
+            display: flex;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(182, 224, 241, 0.5);
+        }
+
+        .content-ticket .column-ticket{
+            width: 100%;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .content-ticket .column-ticket .head-ticket{
+            border: solid 1px black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            background-color: #ffffff;
+        }
+
+        .content-ticket .column-ticket .position{
+            width: 100%;
+        }
+
+        .column-ticket .position .train-name{
+            width: 30%;
+            padding-right: 25px;
+        }
+
+        .column-ticket .position .from-station{
+            width: 20%;
+        }
+
+        .column-ticket .position .duration{
+            width: 15%;
+        }
+
+        .column-ticket .position .to-station{
+            width: 20%;
+        }
+
+        .column-ticket .position .price{
+            width: 15%;
+        }
+
+        .content-ticket .column-ticket .available-ticket{
+            border: solid 1px black;
+            padding: 0 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            height: 20vh;
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+        }
+
+        .content-ticket .column-ticket .sold-ticket{
+            border: solid 1px black;
+            padding: 0 20px;
+            border-radius: 5px;
+            margin: 15px 0;
+            height: 20vh;
+            display: flex;
+            align-items: center;
+            opacity: 0.5;
+            background-color: #ffffff;
+        }
+        
+        /*------train name column-------*/
+        .column-ticket .position .text-train-name{
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .column-ticket .position .text-train-class{
+            font-size: 20px;
+        }
+
+        /*------station column-------*/
+        .column-ticket .position .text-station{
+            font-size: 25px;
+        }
+
+        .column-ticket .position .time-station{
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .column-ticket .position .date-station{
+            font-size: 20px;
+        }
+
+        /*------duration column-------*/
+        .column-ticket .position .line-duration{
+            font-size: 20px;
+        }
+
+        .column-ticket .position .train-icon img{
+            width: 20px;
+            height: 20px;
+        }
+
+        /*------price column-------*/
+        .column-ticket .position .price{
+            text-align: right;
+        }
+
+        .column-ticket .position .seat{
+            font-size: 14px;
+            line-height: 0;
+        }
+
+        .column-ticket .position .price-tag{
+            font-size: 30px;
+            font-weight: bold;
+            padding-bottom: 10px;
+        }
+
+        .column-ticket .position .order-btn button{
+            border: none;
+            border-radius: 50px;
+            background: var(--blue);
+            padding: 10px 20px;
+        }
+
+        /*------sold column-------*/
+        .column-ticket .position .text-sold{
+            font-size: 30px;
+            font-weight: bold;
+            padding-bottom: 13px;
+        }
+
     </style>
 </head>
 <body>
@@ -348,6 +480,80 @@
                     </div>
                     <div class="change-preview">
                         <button>Ubah Pencarian</button>
+                    </div>
+                </div>
+            </div>
+            <div class="result-ticket">
+                <div class="content-ticket">
+                    <div class="column-ticket">
+                        <div class="head-ticket">
+                            <table class="position">
+                                <tr>
+                                    <td class="train-name">Train</td>
+                                    <td class="from-station">From</td>
+                                    <td class="duration">Duration</td>
+                                    <td class="to-station">To</td>
+                                    <td class="price">Price</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="available-ticket">
+                            <table class="position">
+                                <tr>
+                                    <td class="train-name">
+                                        <div class="text-train-name">Gaya Baru Malam Selatan 105</div>
+                                        <div class="text-train-class">Ekonomi</div>
+                                    </td>
+                                    <td class="from-station">
+                                        <div class="text-station">Surabaya Gubeng</div>
+                                        <div class="time-station">12:00</div>
+                                        <div class="date-station">1 Juni 2023</div>
+                                    </td>
+                                    <td class="duration">
+                                        <div class="line-duration">13j 23m</div>
+                                        <div class="train-icon"><img src="./Assets/train-icon.svg" alt=""></div>
+                                    </td>
+                                    <td class="to-station">
+                                        <div class="text-station">Pasar Senen</div>
+                                        <div class="time-station">01:00</div>
+                                        <div class="date-station">2 Juni 2023</div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="seat">Available</div>
+                                        <div class="price-tag">IDR 360.000</div>
+                                        <div class="order-btn"><button>ORDER</button></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="sold-ticket">
+                            <table class="position">
+                                <tr>
+                                    <td class="train-name">
+                                        <div class="text-train-name">Gaya Baru Malam Selatan 105</div>
+                                        <div class="text-train-class">Ekonomi</div>
+                                    </td>
+                                    <td class="from-station">
+                                        <div class="text-station">Surabaya Gubeng</div>
+                                        <div class="time-station">12:00</div>
+                                        <div class="date-station">1 Juni 2023</div>
+                                    </td>
+                                    <td class="duration">
+                                        <div class="line-duration">13j 23m</div>
+                                        <div class="train-icon"><img src="./Assets/train-icon.svg" alt=""></div>
+                                    </td>
+                                    <td class="to-station">
+                                        <div class="text-station">Pasar Senen</div>
+                                        <div class="time-station">01:00</div>
+                                        <div class="date-station">2 Juni 2023</div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="text-sold">Sold Out</div>
+                                        <div class="order-btn"><button>ORDER</button></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
