@@ -197,6 +197,7 @@
         }
 
         .search-preview{
+            position: relative;
             background-color: #fff;
             border-top: 1px solid #dee2ee;
             border-bottom: 1px solid #dee2ee;
@@ -313,7 +314,7 @@
         }
 
         .column-ticket .position .train-name{
-            width: 30%;
+            width: 25%;
             padding-right: 25px;
         }
 
@@ -322,7 +323,8 @@
         }
 
         .column-ticket .position .duration{
-            width: 15%;
+
+            width: 20%;
         }
 
         .column-ticket .position .to-station{
@@ -338,9 +340,10 @@
             padding: 0 20px;
             border-radius: 5px;
             margin: 15px 0;
-            height: 20vh;
+            height: 30vh;
             display: flex;
             align-items: center;
+            line-height: 1.3;
             background-color: #ffffff;
         }
 
@@ -349,43 +352,48 @@
             padding: 0 20px;
             border-radius: 5px;
             margin: 15px 0;
-            height: 20vh;
+            height: 30vh;
             display: flex;
             align-items: center;
+            line-height: 1.3;
             opacity: 0.5;
             background-color: #ffffff;
         }
         
         /*------train name column-------*/
         .column-ticket .position .text-train-name{
-            font-size: 30px;
+            font-size: 26px;
             font-weight: bold;
+            line-height: 1;
+            padding-bottom: 8px;
         }
 
         .column-ticket .position .text-train-class{
-            font-size: 20px;
+            font-size: 15px;
         }
 
         /*------station column-------*/
         .column-ticket .position .text-station{
-            font-size: 25px;
+            font-size: 19px;
         }
 
         .column-ticket .position .time-station{
-            font-size: 30px;
+            font-size: 25px;
             font-weight: bold;
         }
 
         .column-ticket .position .date-station{
-            font-size: 20px;
+            font-size: 19px;
         }
 
         /*------duration column-------*/
         .column-ticket .position .line-duration{
-            font-size: 20px;
+            font-size: 13px;
+            text-align: center;
+            border-bottom: solid 0.3px;
         }
 
-        .column-ticket .position .train-icon img{
+        .column-ticket .position .train-icon{
             width: 20px;
             height: 20px;
         }
@@ -396,12 +404,12 @@
         }
 
         .column-ticket .position .seat{
-            font-size: 14px;
-            line-height: 0;
+            font-size: 12px;
+            line-height: 0.7;
         }
 
         .column-ticket .position .price-tag{
-            font-size: 30px;
+            font-size: 26px;
             font-weight: bold;
             padding-bottom: 10px;
         }
@@ -411,13 +419,26 @@
             border-radius: 50px;
             background: var(--blue);
             padding: 10px 20px;
+            font-weight: bold;
+            font-size: 10px;
+            color: whitesmoke;
         }
 
         /*------sold column-------*/
         .column-ticket .position .text-sold{
-            font-size: 30px;
+            font-size: 26px;
             font-weight: bold;
             padding-bottom: 13px;
+        }
+
+        .column-ticket .sold-ticket .position .order-btn button{
+            border: none;
+            border-radius: 50px;
+            background: #8a93a7;
+            padding: 10px 20px;
+            font-weight: bold;
+            font-size: 10px;
+            color: whitesmoke;
         }
 
     </style>
@@ -511,7 +532,94 @@
                                     </td>
                                     <td class="duration">
                                         <div class="line-duration">13j 23m</div>
-                                        <div class="train-icon"><img src="./Assets/train-icon.svg" alt=""></div>
+                                        <img class="train-icon" src="./Assets/train-icon.svg" alt="">
+                                    </td>
+                                    <td class="to-station">
+                                        <div class="text-station">Pasar Senen</div>
+                                        <div class="time-station">01:00</div>
+                                        <div class="date-station">2 Juni 2023</div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="seat">Available</div>
+                                        <div class="price-tag">IDR 360.000</div>
+                                        <div class="order-btn"><button>ORDER</button></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="available-ticket">
+                            <table class="position">
+                                <tr>
+                                    <td class="train-name">
+                                        <div class="text-train-name">Gaya Baru Malam Selatan 105</div>
+                                        <div class="text-train-class">Ekonomi</div>
+                                    </td>
+                                    <td class="from-station">
+                                        <div class="text-station">Surabaya Gubeng</div>
+                                        <div class="time-station">12:00</div>
+                                        <div class="date-station">1 Juni 2023</div>
+                                    </td>
+                                    <td class="duration">
+                                        <div class="line-duration">13j 23m</div>
+                                        <img class="train-icon" src="./Assets/train-icon.svg" alt="">
+                                    </td>
+                                    <td class="to-station">
+                                        <div class="text-station">Pasar Senen</div>
+                                        <div class="time-station">01:00</div>
+                                        <div class="date-station">2 Juni 2023</div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="seat">Available</div>
+                                        <div class="price-tag">IDR 360.000</div>
+                                        <div class="order-btn"><button>ORDER</button></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="available-ticket">
+                            <table class="position">
+                                <tr>
+                                    <td class="train-name">
+                                        <div class="text-train-name">Gaya Baru Malam Selatan 105</div>
+                                        <div class="text-train-class">Ekonomi</div>
+                                    </td>
+                                    <td class="from-station">
+                                        <div class="text-station">Surabaya Gubeng</div>
+                                        <div class="time-station">12:00</div>
+                                        <div class="date-station">1 Juni 2023</div>
+                                    </td>
+                                    <td class="duration">
+                                        <div class="line-duration">13j 23m</div>
+                                        <img class="train-icon" src="./Assets/train-icon.svg" alt="">
+                                    </td>
+                                    <td class="to-station">
+                                        <div class="text-station">Pasar Senen</div>
+                                        <div class="time-station">01:00</div>
+                                        <div class="date-station">2 Juni 2023</div>
+                                    </td>
+                                    <td class="price">
+                                        <div class="seat">Available</div>
+                                        <div class="price-tag">IDR 360.000</div>
+                                        <div class="order-btn"><button>ORDER</button></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="available-ticket">
+                            <table class="position">
+                                <tr>
+                                    <td class="train-name">
+                                        <div class="text-train-name">Gaya Baru Malam Selatan 105</div>
+                                        <div class="text-train-class">Ekonomi</div>
+                                    </td>
+                                    <td class="from-station">
+                                        <div class="text-station">Surabaya Gubeng</div>
+                                        <div class="time-station">12:00</div>
+                                        <div class="date-station">1 Juni 2023</div>
+                                    </td>
+                                    <td class="duration">
+                                        <div class="line-duration">13j 23m</div>
+                                        <img class="train-icon" src="./Assets/train-icon.svg" alt="">
                                     </td>
                                     <td class="to-station">
                                         <div class="text-station">Pasar Senen</div>
@@ -540,7 +648,7 @@
                                     </td>
                                     <td class="duration">
                                         <div class="line-duration">13j 23m</div>
-                                        <div class="train-icon"><img src="./Assets/train-icon.svg" alt=""></div>
+                                        <img class="train-icon" src="./Assets/train-icon.svg" alt="">
                                     </td>
                                     <td class="to-station">
                                         <div class="text-station">Pasar Senen</div>
@@ -560,6 +668,7 @@
         </div>    
     </div>
     
-    <script></script>
+    <script>
+    </script>
 </body>
 </html>
