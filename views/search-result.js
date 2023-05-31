@@ -1,11 +1,19 @@
 /*-----replace search preview----*/
+var MainPage = document.querySelector('.search-result-page');
 var changeBtn = document.getElementById("change-btn");
 changeBtn.addEventListener("click", function() {
     var searchPreviewDiv = document.querySelector(".search-preview");
     var newDiv = document.createElement("div");
     newDiv.classList.add("search-change");
+    newDiv.classList.add("z-index-999");
     newDiv.innerHTML = "<form class='train-form'><div class='form-group'><div class='form-component from'><div class='title'><label>From</label></div><div class='input-group'><div class='icon'><i class='fa-solid fa-train'></i></div><input placeholder='Kota atau Stasiun Asal' class='form-control' type='text'></div></div><div class='form-component to'><div class='title'><label>To</label></div><div class='input-group'><div class='icon'><i class='fa-solid fa-train'></i></div><input placeholder='Stasiun Tujuan' class='form-control' type='text'></div></div><div class='form-component depart'><div class='title'><label>Departure</label></div><div class='input-group'><div class='icon'><i class='fa-solid fa-calendar'></i></div><input class='form-control' type='date'></div></div><div class='form-component return'><div class='title'><div class='check'><input type='checkbox' id='check'><label>Return</label></div></div><div class='input-group'><div class='icon'><i class='fa-solid fa-calendar'></i></div><input class='form-control' type='date' id='input' disabled></div></div><div class='form-component passenger'><div class='title'><label>Passenger</label></div><div class='input-group'><div class='btn'><button id='minus' class='disabled'><i class='fa-solid fa-minus'></i></button></div><input type='text' id='counter' value='1' readonly><div class='btn'><button id='plus'><i class='fa-solid fa-plus'></i></button></div></div></div></div><div class='footer-form'><button id='search-ticket'>Cari Tiket</button></div></form>";
     searchPreviewDiv.parentNode.replaceChild(newDiv, searchPreviewDiv);
+
+    var divBaru = document.createElement('div');
+    divBaru.classList.add('overlay-searchpage');
+    divBaru.textContent = '';
+
+    MainPage.appendChild(divBaru);
 });
 
 /*-----replace kembali search preview----*/
@@ -16,7 +24,10 @@ searchBtn.addEventListener("click", function() {
     var newDiv = document.createElement("div");
     newDiv.classList.add(".search-preview");
     newDiv.innerHTML = "<div class='content-preview'><div class='preview-column'><div class='list-horizontal'><div class='train-icon'><i class='fa-solid fa-train'></i></div></div><div class='text-section list-horizontal'><div class='header-section'>Tiket Kereta</div><div class='list-preview'><div class='stasion-name list-horizontal'>Surabaya Gubeng</div><div class='journey-icon list-horizontal'><i class='fa-solid fa-arrow-right'></i></div><div class='stasion-name list-horizontal'>Pasar Senen</div><div class='list-horizontal'><div class='icon-line'></div></div><div class='journey-date list-horizontal'>2023/06/01</div><div class='list-horizontal'><div class='icon-line'></div></div><div class='passenger list-horizontal'>1 Penumpang</div></div></div></div><div class='change-preview'><button id='change-btn'>Ubah Pencarian</button></div></div>";
-    searchPreviewDiv.parentNode.replaceChild(newDiv, searchPreviewDiv);
+    searchChangeDiv.parentNode.replaceChild(newDiv, searchChangeDiv);
+
+    var divBaru = document.querySelector('.overlay-searchpage');
+    divBaru.remove();
 });
 
 /*-----check return----*/
@@ -55,3 +66,4 @@ btnMinus.addEventListener("click", function() {
         btnMinus.classList.add("disabled");
     }
 });
+
