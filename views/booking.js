@@ -30,12 +30,12 @@ var checkbox = document.getElementById('check');
 var input = document.getElementById('input');
 
 checkbox.addEventListener('change', function() {
-  if (checkbox.checked) {
-    input.disabled = false;
-  } else {
-    input.disabled = true;
-    input.value = ''; // Mengosongkan nilai input saat checkbox tidak dicentang
-  }
+    if (checkbox.checked) {
+        input.disabled = false;
+    }else {
+        input.disabled = true;
+        input.value = ''; // Mengosongkan nilai input saat checkbox tidak dicentang
+    }
 });
 
 const inputNumber = document.getElementById("counter");
@@ -43,21 +43,21 @@ const btnPlus = document.getElementById("plus");
 const btnMinus = document.getElementById("minus");
 
 btnPlus.addEventListener("click", function() {
-  event.preventDefault();
-  inputNumber.value = parseInt(inputNumber.value) + 1;
-  btnMinus.classList.remove("disabled");
+    event.preventDefault();
+    inputNumber.value = parseInt(inputNumber.value) + 1;
+    btnMinus.classList.remove("disabled");
 });
 
 btnMinus.addEventListener("click", function() {
-  event.preventDefault();
-  const currentValue = parseInt(inputNumber.value);
-  if (currentValue > 1) {
-    inputNumber.value = currentValue - 1;
-  }
+    event.preventDefault();
+    const currentValue = parseInt(inputNumber.value);
+    if (currentValue > 1) {
+        inputNumber.value = currentValue - 1;
+    }
 
-  if (parseInt(inputNumber.value) === 1) {
-    btnMinus.classList.add("disabled");
-  }
+    if (parseInt(inputNumber.value) === 1) {
+        btnMinus.classList.add("disabled");
+    }
 });
 
 
@@ -67,31 +67,31 @@ var SearchPage = document.querySelector('.train-form');
 var divBaruDibuat = false;
 
 SearchPage.addEventListener('click', function(event) {
-  SearchPage.classList.add('z-index-999');
+    SearchPage.classList.add('z-index-999');
 
-  if(!divBaruDibuat){
-    var divBaru = document.createElement('div');
-    divBaru.classList.add('overlay-searchpage');
-    divBaru.textContent = '';
-  
-    SearchMainPage.appendChild(divBaru);
-  
-    divBaruDibuat = true;
-  }
+    if(!divBaruDibuat){
+        var divBaru = document.createElement('div');
+        divBaru.classList.add('overlay-searchpage');
+        divBaru.textContent = '';
+      
+        SearchMainPage.appendChild(divBaru);
+      
+        divBaruDibuat = true;
+    }
 
-  event.stopPropagation();
+    event.stopPropagation();
 });
 
 document.addEventListener('click', function(event) {
-  if (!SearchPage.contains(event.target)) {
-    SearchPage.classList.remove('z-index-999');
+    if (!SearchPage.contains(event.target)) {
+        SearchPage.classList.remove('z-index-999');
 
-    var divBaru = document.querySelector('.overlay-searchpage');
-    if (divBaru) {
-      divBaru.remove();
-      divBaruDibuat = false;
+        var divBaru = document.querySelector('.overlay-searchpage');
+        if (divBaru) {
+            divBaru.remove();
+            divBaruDibuat = false;
+        }
     }
-  }
 });
 
 
