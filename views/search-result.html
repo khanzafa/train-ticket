@@ -4,10 +4,297 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <title>Search-Result</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Nunito&family=Roboto+Slab:wght@900&display=swap");
+        @import url('https://fonts.googleapis.com/css?family=Titillium+Web:400,600,700');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 100vh;
+            display: grid;
+
+
+            --primary: whitesmoke;
+            --blue: #14b0ee;
+        }
+        
+        .container{
+            width: 100%;
+        }
+
+        /*--- navbar ---*/
+        a {
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            position: relative;
+            color: #333;
+            padding: 10px 0px;
+            letter-spacing: 1px;
+            font-size: 12.5px;
+        }
+
+        .menu {
+            z-index: 888;
+            background: #fff;
+            margin: auto;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 100%;
+            text-align: center;
+            padding: 8px 2rem;
+            height: 70px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+        .menu ol {
+            padding-left: 0px;
+        }
+
+        ol{
+            display: block;
+            list-style-type: decimal;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 40px;
+        }
+
+        .logo {
+            float: left;
+            position: absolute;
+            top: 10px;
+            left: 2rem;
+            width: 60px;
+            height: 50px;
+        }
+        .search {
+            float: right;
+            position: absolute;
+            top: 25px;
+            right: 2rem;
+            stroke: #333;
+            width: 20px;
+            height: 20px;
+        }
+        .menu-item {
+            list-style-type: none;
+            display: inline;
+            position: relative;
+            margin: 15px;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .menu-item:before {
+            position: absolute;
+            content: "";
+            border-bottom: 3px solid #333;
+            overflow: hidden;
+            width: 0%;
+            left: 50%;
+            top: 40px;
+            transition: 0.2s ease-in-out 0.15s;
+        }
+
+        .menu-item:hover:before {
+            width: 100%;
+            left: 0%;
+            transition: 0.2s ease-in-out;
+        }
+
+        .sub-menu {
+            position: absolute;
+            left: 0%;
+            background: #fff;
+            font-family: 'Titillium Web', sans-serif;
+            padding: 0;
+            text-align: left;
+            box-shadow: 0px 4px 20px -5px rgba(0, 0, 0, 0.15);
+            max-height: 0;
+            width: 150px;
+            opacity: 0;
+            transition: 0.45s ease all 0.1s;
+            z-index: 0;
+            -webkit-transform: translateY(20px);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.1s;
+            visibility: hidden;
+        }
+        .menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu {
+            max-height: 200px;
+            max-width: 200px;
+            opacity: 1;
+            -webkit-transform: translateY(0px);
+            transform: translateY(0px);
+            opacity: 1;
+            transition-delay: 0.15s;
+            visibility: visible;
+        }
+        .sub-menu .menu-item {
+            display: block;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        .menu-item:nth-child(n + 3):nth-child(-n + 4) .plus-icon {
+            width: 15px;
+            height: 15px;
+            stroke: #333;
+            margin-left: 2px;
+            margin-bottom: -5px;
+        }
+
+        .menu-item:nth-child(n + 3):nth-child(-n + 4) .sub-menu-item {
+            list-style-type: none;
+            display: block;
+            margin: 15px;
+            position: relative;
+            opacity: 0;
+            transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) all 0.1s;
+            visibility: hidden;
+        }
+        .menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu {
+            max-height: 200px;
+            max-width: 200px;
+            opacity: 1;
+        }
+        .menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu-item a {
+            transition: 0.15s ease all;
+        }
+        .menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu-item a:hover {
+            color: grey;
+        }
+        .menu-item:nth-child(n + 3):nth-child(-n + 4):hover .sub-menu-item {
+            -webkit-transform: translateY(0px);
+                    transform: translateY(0px);
+            opacity: 1;
+            transition-delay: 0.15s;
+            visibility: visible;
+        }
+
+        .menu .logo img {
+            height: 50px;
+            width: 50px;
+        }
+
+        .menu .logo h1 {
+            display: inline;
+            position: relative;
+            font-family: 'Titillium Web', sans-serif;
+        }
+
+        /*--- search result page ---*/
+        .search-result-page{
+            display: block;
+            position: relative;
+        }
+
+        .search-preview{
+            background-color: #fff;
+            border-top: 1px solid #dee2ee;
+            border-bottom: 1px solid #dee2ee;
+            height: 96px;
+            padding: 0 15px;
+        }
+
+        .list-horizontal{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .content-preview{
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .preview-column{
+            position: relative;
+            height: 96px;
+            width: 80%;
+            border-right: 1px solid #dee2ee;
+            overflow: hidden;
+            display: flex;
+            flex: 1;
+            align-items: center;
+        }
+
+        .content-preview .preview-column .text-section .list-preview .list-horizontal .icon-line{
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #8a93a7;
+            margin: 0 10px;
+        }
+        .content-preview .preview-column .text-section{
+            font-family: 'Titillium Web', sans-serif;           
+        }   
+
+        .content-preview .preview-column .text-section .header-section{
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 0.8;
+        }
+
+        .content-preview .preview-column .text-section .list-preview{
+            font-weight: 500;
+            font-size: 15px;
+        }
+
+        .icon{
+            background-color: var(--blue);
+            border: solid 1px var(--blue);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            padding: 7px;
+            margin-right: 16px;
+            display: flex;
+        }
+
+        .icon i{
+            margin-left: 3px;
+            margin-top: 2px;
+            color: #ffffff;
+        }
+
+        .change-preview{
+            position: relative;
+            height: 96px;
+            width: 20%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .change-preview button {
+            padding: 13px 14px;
+            border: none;
+            border-radius: 24px;
+            background-color: #f7f7f7;
+            font-family: 'Titillium Web', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #0064d2;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+=======
     <link rel="stylesheet" href="search-result.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <title>Search-Result</title>
     <style>
+>>>>>>> e79373d0ab62f8ab726d61cf998be2c335a119c2
     </style>
 </head>
 <body>
@@ -52,7 +339,11 @@
             <div class="search-preview">
                 <div class="content-preview">
                     <div class="preview-column">
+<<<<<<< HEAD
+                        <div class="list-horizontal"><div class="icon"><i class="fa-solid fa-train"></i></div></div>
+=======
                         <div class="list-horizontal"><div class="train-icon"><i class="fa-solid fa-train"></i></div></div>
+>>>>>>> e79373d0ab62f8ab726d61cf998be2c335a119c2
                         <div class="text-section list-horizontal">
                             <div class="header-section">Tiket Kereta</div>
                             <div class="list-preview">
@@ -67,6 +358,9 @@
                         </div>
                     </div>
                     <div class="change-preview">
+<<<<<<< HEAD
+                        <button>Ubah Pencarian</button>
+=======
                         <button id="change-btn">Ubah Pencarian</button>
                     </div>
                 </div>
@@ -229,12 +523,18 @@
                                 </tr>
                             </table>
                         </div>
+>>>>>>> e79373d0ab62f8ab726d61cf998be2c335a119c2
                     </div>
                 </div>
             </div>
         </div>    
     </div>
+<<<<<<< HEAD
+    
+    <script></script>
+=======
 
     <script src="./search-result.js"></script>
+>>>>>>> e79373d0ab62f8ab726d61cf998be2c335a119c2
 </body>
 </html>
