@@ -183,7 +183,7 @@ ol{
 
 /*----form page----*/
 .form-page{
-    display: block;
+    display: flex;
     position: relative;
     font-family: "Nunito", sans-serif;
 }
@@ -425,5 +425,7 @@ ol{
     padding: 20px;
     border-radius: 5px;
     background: #ffffff;
+    padding-top: 40px;
+    width: 412px;
 }
 
