@@ -49,10 +49,6 @@ router.post('/login', async(req, res) => {
   }
 });
 
-/* Tampilan Register */
-router.get('/register', function(req, res, next){
-  res.render('log');
-});
 /* Proses Register */
 router.post('/register', async (req, res)=>{
   const {name, username, password, email, phone} = req.body;
@@ -77,10 +73,14 @@ router.get('/logout', function(req, res, next) {
 });
 
 router.get('/search', function (req, res){
-  res.render('search');
+  res.render('booking');
 });
 router.post('/search', async (req, res) => {
 
 })
+
+router.get('/index', function(req, res, next){
+  res.render('landing');
+});
 
 module.exports = router;
