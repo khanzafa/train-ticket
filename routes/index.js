@@ -21,9 +21,9 @@ router.get('/login', function(req, res, next) {
 /* Proses Login */
 router.post('/login', async(req, res) => {
   try {
-    const {username, password} = req.body;    
+    const {email, password} = req.body;    
     const User = req.app.get('User');
-    const user = await User.findOne({where:{username}});
+    const user = await User.findOne({where:{email}});
     
     //User not found
     if(!user){
@@ -51,11 +51,11 @@ router.post('/login', async(req, res) => {
 
 /* Proses Register */
 router.post('/register', async (req, res)=>{
-  const {name, username, password, email, phone} = req.body;
+  const {resident_id, name, email, password, phone} = req.body;
   try {
     const User = req.app.get('User');
     const newUser = await User.create({
-      name, username, password, email, phone
+      resident_id, name, email, password, phone
     });
     
     res.redirect('/login');
@@ -72,14 +72,14 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/search', function (req, res){
+router.get('/booking', function (req, res){
   res.render('booking');
 });
-router.post('/search', async (req, res) => {
+router.post('/booking', async (req, res) => {
 
 })
 
-router.get('/index', function(req, res, next){
+router.get('/', function(req, res, next){
   res.render('landing');
 });
 
