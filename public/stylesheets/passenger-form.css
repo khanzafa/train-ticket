@@ -398,6 +398,8 @@ ol{
     height: 20px;
     display: flex;
     align-items: center;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .trip-content .station-trip{
@@ -416,5 +418,12 @@ ol{
     border-radius: 50%;
     background: #8a93a7;
     margin: 0 5px;
+}
+
+.summary-trip{
+    position: relative;
+    padding: 20px;
+    border-radius: 5px;
+    background: #ffffff;
 }
 
