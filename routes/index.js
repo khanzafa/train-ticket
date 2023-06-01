@@ -33,13 +33,15 @@ router.post('/login', async(req, res) => {
       if(err){
         console.error('Error comparing passwords:', err);
         return res.status(500).json({message: 'Error comparing passwords'});
+
       }
       if(result){
         //Login berhasil
         req.session.user = user;
-        return res.status(200).json({message:'Login berhasil'});
+        res.redirect("/booking");
+        //return res.status(200).json({message:'Login berhasil'});
       }else{
-        //Invalid password      
+        //Invalid password   
         return res.status(401).json({message:'Password tidak cocok'});        
       }
     });
@@ -72,7 +74,7 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/booking', function (req, res){
+router.get('/booking', function (req, res, next){
   res.render('booking');
 });
 router.post('/booking', async (req, res) => {
