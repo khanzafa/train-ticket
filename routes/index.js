@@ -83,4 +83,8 @@ router.get('/index', function(req, res, next){
   res.render('landing');
 });
 
+router.get('/dashboard', function(req, res, next){
+  res.render('dashboard');
+});
+
 module.exports = router;

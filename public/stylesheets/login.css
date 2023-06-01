@@ -106,7 +106,7 @@ button {
   top: 0;
   width: 900px;
   height: 100%;
-  background-image: url("/images/bckpic.png");
+  background-image: url("../Assets/bckpic.png");
   background-size: cover;
   transition: transform 1.2s ease-in-out;
 }
