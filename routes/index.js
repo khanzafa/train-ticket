@@ -72,14 +72,14 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/search', function (req, res){
+router.get('/booking', function (req, res){
   res.render('booking');
 });
-router.post('/search', async (req, res) => {
+router.post('/booking', async (req, res) => {
 
 })
 
-router.get('/index', function(req, res, next){
+router.get('/', function(req, res, next){
   res.render('landing');
 });
 
