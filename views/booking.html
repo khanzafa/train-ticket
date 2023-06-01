@@ -9,6 +9,7 @@
     <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Booking</title>
 </head>
 <body>
@@ -50,45 +51,21 @@
     </nav>
 
     <section id="promo" class="promo-page">
-        <video class="video-promo active" src="/train-ticket/public/images/VideoBack.mp4" autoplay muted loop></video>
-        <video class="video-promo" src="/train-ticket/public/images/videoplayback.webm" autoplay muted loop></video>
-        <video class="video-promo" src="/train-ticket/public/images/VideoBack.mp4" autoplay muted loop></video>
-        <video class="video-promo" src="/train-ticket/public/images/videoplayback.webm" autoplay muted loop></video>
+        <video class="video-promo active" src="/train-ticket/public/images/japan.mp4" autoplay muted loop></video>
+        <video class="video-promo" src="/train-ticket/public/images/swiss.mp4" autoplay muted loop></video>
+        <video class="video-promo" src="/train-ticket/public/images/dubai.mp4" autoplay muted loop></video>
+        <video class="video-promo" src="/train-ticket/public/images/paris.mp4" autoplay muted loop></video>
         <div class="content active">
-            <h1>Travel.</h1>
-            <h1>Explore.</h1>
-            <h1>Experience.</h1>
-            <h1>TrainVenture.</h1>
-            <p>Find out how you can get involved and become part of our journey.<br>Come to <strong>TrainVenture</strong> and have the time of your life.</p>
-
-            <button><a class="nav-link" href="#search-page">Grab yours!</a></button>
+            <h1>JAPAN</h1>
         </div>
         <div class="content">
-            <h1>Travel.</h1>
-            <h1>Explore.</h1>
-            <h1>Experience.</h1>
-            <h1>TrainVenture.</h1>
-            <p>Find out how you can get involved and become part of our journey.<br>Come to <strong>TrainVenture</strong> and have the time of your life.</p>
-
-            <button><a href="#search-page">Grab yours!</a></button>
+            <h1>SWISS</h1>
         </div>
         <div class="content">
-            <h1>Travel.</h1>
-            <h1>Explore.</h1>
-            <h1>Experience.</h1>
-            <h1>TrainVenture.</h1>
-            <p>Find out how you can get involved and become part of our journey.<br>Come to <strong>TrainVenture</strong> and have the time of your life.</p>
-
-            <button><a href="#search-page">Grab yours!</a></button>
+            <h1>DUBAI</h1>
         </div>
         <div class="content">
-            <h1>Travel.</h1>
-            <h1>Explore.</h1>
-            <h1>Experience.</h1>
-            <h1>TrainVenture.</h1>
-            <p>Find out how you can get involved and become part of our journey.<br>Come to <strong>TrainVenture</strong> and have the time of your life.</p>
-
-            <button><a href="#search-page">Grab yours!</a></button>
+            <h1>PARIS</h1>
         </div>
         <div class="slides-promo">
             <div class="nav-btn active"></div>
@@ -101,7 +78,7 @@
         <div class="train-form">
             <div class="header-form">
                 <div class="icon"><i class="fa-solid fa-train"></i></div>
-                <h1>Cari & Pesan Tiket Kereta Api</h1>
+                <h1>Find Your Train Ticket</h1>
             </div>
             <div class="form-group">
                 <div class="form-component from">
@@ -110,7 +87,7 @@
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="fa-solid fa-train"></i></div>
-                        <input placeholder="Kota atau Stasiun Asal" class="form-control" type="text">
+                        <input placeholder="Origin City" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="form-component to">
@@ -119,12 +96,12 @@
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="fa-solid fa-train"></i></div>
-                        <input placeholder="Stasiun Tujuan" class="form-control" type="text">
+                        <input placeholder="Destination City" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="form-component depart">
                     <div class="title">
-                        <label>Departure</label>
+                        <label>Date</label>
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="fa-solid fa-calendar"></i></div>
@@ -135,7 +112,7 @@
                     <div class="title">
                         <div class="check">
                             <input type="checkbox" id="check">
-                            <label>Return</label>
+                            <label>Add Return</label>
                         </div>
                     </div>
                     <div class="input-group">
@@ -159,10 +136,34 @@
                 </div>
             </div>
             <div class="footer-form">
-                <button>Cari Tiket</button>
+                <button>FIND TICKET</button>
             </div>
         </div>          
     </form>
+
+    <footer>
+        <div class="footer">
+            <div class="row">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-youtube"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="row">
+                TrainVenture Copyright © 2023 TrainVenture - All rights reserved
+            </div>
+        </div>
+    </footer>
     
     <script src="/train-ticket/public/javascripts/booking.js"></script>
 </body>
