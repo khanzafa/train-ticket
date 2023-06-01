@@ -17,14 +17,16 @@ changeBtn.addEventListener("click", function() {
 });
 
 /*-----replace kembali search preview----*/
+var SearchPage = document.querySelector('.search-change');
 var searchBtn = document.getElementById("search-ticket");
 
 searchBtn.addEventListener("click", function() {
-    var searchChangeDiv = document.querySelector(".search-change");
-    var newDiv = document.createElement("div");
-    newDiv.classList.add(".search-preview");
-    newDiv.innerHTML = "<div class='content-preview'><div class='preview-column'><div class='list-horizontal'><div class='train-icon'><i class='fa-solid fa-train'></i></div></div><div class='text-section list-horizontal'><div class='header-section'>Tiket Kereta</div><div class='list-preview'><div class='stasion-name list-horizontal'>Surabaya Gubeng</div><div class='journey-icon list-horizontal'><i class='fa-solid fa-arrow-right'></i></div><div class='stasion-name list-horizontal'>Pasar Senen</div><div class='list-horizontal'><div class='icon-line'></div></div><div class='journey-date list-horizontal'>2023/06/01</div><div class='list-horizontal'><div class='icon-line'></div></div><div class='passenger list-horizontal'>1 Penumpang</div></div></div></div><div class='change-preview'><button id='change-btn'>Ubah Pencarian</button></div></div>";
-    searchChangeDiv.parentNode.replaceChild(newDiv, searchChangeDiv);
+    document.addEventListener('click', function(event) {
+        if (!SearchPage.contains(event.target)) {
+            var divBaru = document.querySelector('.overlay-searchpage');
+            divBaru.remove();
+        }
+      });
 
     var divBaru = document.querySelector('.overlay-searchpage');
     divBaru.remove();

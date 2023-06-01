@@ -211,11 +211,37 @@ ol{
     position: relative;
     height: 96px;
     width: 80%;
-    border-right: 1px solid #dee2ee;
     overflow: hidden;
     display: flex;
     flex: 1;
     align-items: center;
+    border-right: 1px solid #dee2ee;
+}
+
+.choose-ticket{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #dee2ee;
+    height: 100%;
+    width: 80%;
+}
+
+.choose-ticket .content-box{
+    padding-left: 15px;
+}
+
+.return-preview{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #dee2ee;
+    height: 100%;
+    width: 20%;
+}
+
+.return-preview .header-section{
+    padding-left: 20px;
+    padding-right: 5px;
+    text-align: center;
 }
 
 .content-preview .preview-column .text-section .list-preview .list-horizontal .icon-line{
@@ -225,11 +251,11 @@ ol{
     background: #8a93a7;
     margin: 0 10px;
 }
-.content-preview .preview-column .text-section{
+.content-preview .preview-column{
     font-family: 'Titillium Web', sans-serif;           
 }   
 
-.content-preview .preview-column .text-section .header-section{
+.header-section{
     font-weight: bold;
     font-size: 20px;
     line-height: 0.8;
@@ -254,7 +280,35 @@ ol{
 .train-icon i{
     margin-left: 3px;
     margin-top: 2px;
+    font-size: 12px;
     color: #ffffff;
+}
+
+.border-left{
+    height: 100%;
+    width: 0;
+    position: absolute;
+    top: 0;
+}
+
+.border-left::before{
+    position: absolute;
+    content: "";
+    border-top: 11px solid rgba(0,0,0,0);
+    border-bottom: 11px solid rgba(0,0,0,0);
+    border-left: 11px solid #dee2ee;
+    left: -1px;
+    top: 36px;
+}
+
+.border-left::after{
+    position: absolute;
+    content: "";
+    border-top: 10px solid rgba(0,0,0,0);
+    border-bottom: 10px solid rgba(0,0,0,0);
+    border-left: 10px solid #fff;
+    left: -1px;
+    top: 37px;
 }
 
 .change-preview{
@@ -625,4 +679,57 @@ ol{
     right: 0;
     z-index: 888;
     background: rgb(0 0 0 / 70%);
+}
+
+
+/*----return----*/
+.selected-ticket{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #dee2ee;
+    height: 100%;
+    width: 30%;
+}
+
+.checked-icon{
+    background-color: var(--blue);
+    border: solid 1px var(--blue);
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    padding: 11px 4px 4px 11px;
+    margin-right: 16px;
+    margin-left: 12px;
+    display: flex;
+}
+
+.checked-icon i{
+    padding-bottom: 10px;
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.selected-ticket .text-section{
+    width: 100%;
+    padding: 10px;
+}
+
+.selected-ticket .text-section .to-station{
+    width: 100%;
+}
+
+.line {
+    float: left;
+    width: 25px;
+    border-bottom: solid 0.7px;
+}
+
+.selected-ticket .text-section .from-station, .to-station{
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.selected-ticket .text-section .price-ticket{
+    font-weight: bold;
+    color: #0064d2;
 }
