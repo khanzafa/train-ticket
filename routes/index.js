@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const { where } = require('sequelize');
 
 router.use(session({
   secret:'v654h6cv5oi2435xuu',
@@ -37,9 +38,10 @@ router.post('/login', async(req, res) => {
       if(result){
         //Login berhasil
         req.session.user = user;
-        return res.status(200).json({message:'Login berhasil'});
+        res.redirect("/booking");
+        //return res.status(200).json({message:'Login berhasil'});
       }else{
-        //Invalid password      
+        //Invalid password   
         return res.status(401).json({message:'Password tidak cocok'});        
       }
     });
@@ -72,12 +74,41 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/booking', function (req, res){
+router.get('/booking', function (req, res, next){
   res.render('booking');
 });
-router.post('/booking', async (req, res) => {
 
-})
+router.post('/booking', async (req, res) => {
+  try{
+    const Ticket = req.app.get("Ticket");  
+    const { departure_station_id, arrival_station_id, date } = req.body;
+    const tickets = await Ticket.findAll({
+      where:{
+        departure_station_id, arrival_station_id, date,
+      },
+    });
+    res.json(tickets);
+  }catch(err){
+    console.error('Error retrieving train tickets: ', err);
+    res.status(500).send('Error retrieving train tickets');
+  }
+
+  // const query = `
+  //   SELECT * FROM Tickets
+  //   WHERE departure_station_id = ${departure_station_id}
+  //   AND arrival_station_id = ${arrival_station_id}
+  //   AND date = '${date}'
+  // `;
+
+  // router.query(query, (err, results) => {
+  //   if (err) {
+  //     console.error('Error executing the query: ', err);
+  //     res.status(500).send('Error retrieving train tickets');
+  //     return;
+  //   }
+
+  // res.json(results);
+});
 
 router.get('/', function(req, res, next){
   res.render('landing');

@@ -16,6 +16,7 @@ const sequelize = new Sequelize('ticket', 'khanza', 'tiwiCute04', {
   dialect: 'mariadb', // ganti dengan dialect yang sesuai (misalnya, postgres untuk PostgreSQL)
 });
 
+//MODEL USER
 const {v4: uuidv4} = require('uuid');
 const User = sequelize.define('User', {
   user_id: {
@@ -63,6 +64,33 @@ User.beforeCreate(async (user)=>{
   user.password = hashedPassword;
 });
 
+//MODEL TICKET
+const Ticket = sequelize.define("Ticket", {
+  ticket_id : {
+    type: DataTypes.NUMBER,
+    allowNull: false,
+    primaryKey: true
+  }, 
+  train_id : {
+    type: DataTypes.NUMBER,
+    allowNull: false
+  }, 
+  departure_station_id : {
+    type: DataTypes.NUMBER,
+    allowNull: false
+  }, 
+  arrival_station_id : {
+    type: DataTypes.NUMBER,
+    allowNull: false
+  }, 
+  date : {
+    type: DataTypes.DATEONLY,
+    allowNull: false
+  }
+}, {
+  timestamps:false,
+});
+
 // Synchronize the model with the database
 sequelize.sync()
   .then(()=>{
@@ -102,5 +130,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.set('User', User);
-
+app.set('Ticket', Ticket);
 module.exports = app;
