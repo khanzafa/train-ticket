@@ -366,8 +366,6 @@ ol{
     padding-top: 10px;
 }
 
-
-
 .check-agreed label{
     margin-left: 3px;
     font-weight: bold;
@@ -398,6 +396,13 @@ ol{
     float: left;
     width: 20px;
     height: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.trip-content .station-trip{
+    display: flex;
+    align-items: center;
 }
 
 .list-horizontal{
@@ -405,4 +410,11 @@ ol{
     vertical-align: middle;
 }
 
+.icon-line{
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #8a93a7;
+    margin: 0 5px;
+}
 
