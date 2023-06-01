@@ -3,7 +3,7 @@ html(lang="en")
   head
     meta(charset="UTF-8")
     title TrainVenture
-    link(rel="icon", href="./Assets/Icon.ico", type="image/png")
+    link(rel="icon", href="/images/Icon.ico", type="image/png")
     link(href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap", rel="stylesheet")
     link(rel="stylesheet", href="/stylesheets/login.css")
   body
@@ -18,11 +18,11 @@ html(lang="en")
         h2 Where Your Journey Begins!
         label
           span Email
-          input(type="email")
+          input(type="email", id="email", name="email")
         label
           span Password
-          input(type="password")
-        button(type="button", class="submit") Sign In
+          input(type="password", id="password", name="password")
+        button(type="submit", class="submit") Sign In
       .sub-cont
         .img
           .img__text.m--up
@@ -34,7 +34,7 @@ html(lang="en")
           .img__btn
             span.m--up Sign Up
             span.m--in Sign In
-        form.form.sign-up(action="register" method="post")
+        form.form.sign-up(action="/register" method="post")
           h2
             img(src="/images/Icon.ico", width="60", height="60", class="image-style")
           h2 Discover the World with
@@ -42,17 +42,21 @@ html(lang="en")
           .grid-container
             .column
               label
-                span Name
-                input(type="text")
+                span Resident ID
+                input(type="text", name="resident_id", id="resident_id")
               label
-                span Email
-                input(type="email")
+                span Name
+                input(type="text", name="name", id="name")
             .column
               label
-                span Resident ID
-                input(type="text")
+                span Email
+                input(type="email", name="email", id="email")
               label
                 span Password
-                input(type="password")
-          button(type="button", class="submit") Sign Up
+                input(type="password", name="password", id="password")
+            .column
+              label
+                span Phone
+                input(type="text", name="phone", id="phone")
+          button(type="submit", class="submit") Sign Up
   script(src="/javascripts/login.js")
