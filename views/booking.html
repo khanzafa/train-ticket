@@ -9,6 +9,7 @@
     <link
     href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Booking</title>
 </head>
 <body>
@@ -86,7 +87,7 @@
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="fa-solid fa-train"></i></div>
-                        <input placeholder="Kota atau Stasiun Asal" class="form-control" type="text">
+                        <input placeholder="Origin City" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="form-component to">
@@ -95,12 +96,12 @@
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="fa-solid fa-train"></i></div>
-                        <input placeholder="Stasiun Tujuan" class="form-control" type="text">
+                        <input placeholder="Destination City" class="form-control" type="text">
                     </div>
                 </div>
                 <div class="form-component depart">
                     <div class="title">
-                        <label>Departure</label>
+                        <label>Date</label>
                     </div>
                     <div class="input-group">
                         <div class="icon"><i class="fa-solid fa-calendar"></i></div>
@@ -111,7 +112,7 @@
                     <div class="title">
                         <div class="check">
                             <input type="checkbox" id="check">
-                            <label>Return</label>
+                            <label>Add Return</label>
                         </div>
                     </div>
                     <div class="input-group">
@@ -135,10 +136,34 @@
                 </div>
             </div>
             <div class="footer-form">
-                <button>Cari Tiket</button>
+                <button>FIND TICKET</button>
             </div>
         </div>          
     </form>
+
+    <footer>
+        <div class="footer">
+            <div class="row">
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <a href="#"><i class="fa fa-instagram"></i></a>
+                <a href="#"><i class="fa fa-youtube"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li><a href="#">Contact us</a></li>
+                    <li><a href="#">Our Services</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="row">
+                TrainVenture Copyright © 2023 TrainVenture - All rights reserved
+            </div>
+        </div>
+    </footer>
     
     <script src="/train-ticket/public/javascripts/booking.js"></script>
 </body>
