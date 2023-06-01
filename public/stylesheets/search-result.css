@@ -219,6 +219,32 @@ ol{
     align-items: center;
 }
 
+.choose-ticket{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #dee2ee;
+    height: 100%;
+    width: 80%;
+}
+
+.choose-ticket .content-box{
+    padding-left: 15px;
+}
+
+.return-preview{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #dee2ee;
+    height: 100%;
+    width: 20%;
+}
+
+.return-preview .header-section{
+    padding-left: 20px;
+    padding-right: 5px;
+    text-align: center;
+}
+
 .content-preview .preview-column .text-section .list-preview .list-horizontal .icon-line{
     width: 4px;
     height: 4px;
@@ -226,11 +252,11 @@ ol{
     background: #8a93a7;
     margin: 0 10px;
 }
-.content-preview .preview-column .text-section{
+.content-preview .preview-column {
     font-family: 'Titillium Web', sans-serif;           
 }   
 
-.content-preview .preview-column .text-section .header-section{
+.header-section{
     font-weight: bold;
     font-size: 20px;
     line-height: 0.8;
@@ -247,7 +273,7 @@ ol{
     border-radius: 50%;
     width: 32px;
     height: 32px;
-    padding: 5px;
+    padding: 7px;
     margin-right: 18px;
     display: flex;
 }
@@ -255,8 +281,37 @@ ol{
 .train-icon i{
     margin-left: 3px;
     margin-top: 2px;
+    font-size: 12px;
     color: #ffffff;
 }
+
+.border-left{
+    height: 100%;
+    width: 0;
+    position: absolute;
+    top: 0;
+}
+
+.border-left::before{
+    position: absolute;
+    content: "";
+    border-top: 11px solid rgba(0,0,0,0);
+    border-bottom: 11px solid rgba(0,0,0,0);
+    border-left: 11px solid #dee2ee;
+    left: -1px;
+    top: 36px;
+}
+
+.border-left::after{
+    position: absolute;
+    content: "";
+    border-top: 10px solid rgba(0,0,0,0);
+    border-bottom: 10px solid rgba(0,0,0,0);
+    border-left: 10px solid #fff;
+    left: -1px;
+    top: 37px;
+}
+
 
 .change-preview{
     position: relative;
@@ -369,6 +424,7 @@ ol{
 /*------station column-------*/
 .column-ticket .position .text-station{
     font-size: 19px;
+    font-weight: 400;
 }
 
 .column-ticket .position .time-station{
@@ -378,6 +434,7 @@ ol{
 
 .column-ticket .position .date-station{
     font-size: 19px;
+    font-weight: 400;
 }
 
 /*------duration column-------*/
@@ -664,6 +721,58 @@ ol{
 .footer .row a i {
     font-size: 2em;
     margin: 0% 1%;
+}
+
+/*----return----*/
+.selected-ticket{
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #dee2ee;
+    height: 100%;
+    width: 30%;
+}
+
+.checked-icon{
+    background-color: var(--blue);
+    border: solid 1px var(--blue);
+    border-radius: 50%;
+    width:40px;
+    height: 40px;
+    padding: 5px 4px 4px 4px;
+    margin-right: 16px;
+    margin-left: 12px;
+    display: flex;
+}
+
+.checked-icon i{
+    padding-bottom: 10px;
+    font-size: 30px;
+    color: #ffffff;
+}
+
+.selected-ticket .text-section{
+    width: 100%;
+    padding: 10px;
+    line-height: 19px;
+}
+
+.selected-ticket .text-section .to-station{
+    width: 100%;
+}
+
+.line {
+    float: left;
+    width: 25px;
+    border-bottom: solid 0.7px;
+}
+
+.selected-ticket .text-section .from-station, .to-station{
+    font-weight: 700;
+}
+
+.selected-ticket .text-section .price-ticket{
+    font-weight: bold;
+    color: #0064d2;
 }
 
 @media (max-width:720px) {
