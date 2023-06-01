@@ -47,63 +47,107 @@
             <span class="bar"></span>
         </nav>
         <div class="form-page">
-            <div class="booking-timer">
-                <div class="timer-container">
-                    <p>Please complete your booking in</p>
-                    <div class="timer-area">
-                        <div class="timer-box">00</div>
-                        <div class="space">:</div>
-                        <div class="timer-box"><span>15</span></div>
-                        <div class="space">:</div>
-                        <div class="timer-box"><span>00</span></div>
-                    </div>
-                </div>
-            </div>
             <div class="content-form">
                 <div class="form-passenger">
                     <form class="data-passenger" action="">
                         <div class="detail-passenger">
                             <div class="title-form">
                                 <div class="icon-people"><i class="fa-solid fa-user"></i></div>
-                                <h2>Passenger Details</h2>
+                                <h1>Passenger Details</h1>
                             </div>
                             <div class="head-form">Passenger @</div>
                             <div class="form-input fullname">
-                                <input type="text" nama="fullname" id="fullname" placeholder="Full Name">
-                                <label for="fullname">Full Name</label>
+                                <div class="field">
+                                    <input type="text" nama="fullname" id="fullname" autocomplete="off">
+                                    <label for="fullname">Full Name</label>
+                                </div>
                                 <p>As on ID/Passport (without punctuation and degree).</p>
                             </div>
                             <div class="form-input title">
-                                <input name="title" id="title" readonly value="Mr">
-                                <input type="hidden" name="title" id="title" class="hide" value="Mrs">
-                                <input type="hidden" name="title" id="title" class="hide" value="Ms">
-                                <label for="title">Title</label>
-                                <i class="fa-solid fa-chevron-down"></i>
+                                <div class="field">
+                                    <input class="dropdown-input" name="title" id="title" readonly value="Mr" autocomplete="off">
+                                    <div class="dropdown-list">
+                                        <div class="dropdown-item" name="title" data-value="Mr">Mr</div>
+                                        <div class="dropdown-item" name="title" data-value="Mrs">Mrs</div>
+                                        <div class="dropdown-item" name="title" data-value="Ms">Ms</div>
+                                    </div>
+                                    <label for="title">Title</label>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </div>
                             <div class="form-input type-id">
-                                <input name="type-id" id="type-id" type="text" placeholder="ID Number">
-                                <input name="type-id" id="type-id" readonly value="ID">
-                                <input type="hidden" name="type-id" id="type-id" class="hide" value="Passpor">
-                                <label for="type-id">Identity</label>
-                                <i class="fa-solid fa-chevron-down"></i>
+                                <div class="field">
+                                    <input class="input" name="type-id" id="type-id" readonly value="ID" autocomplete="off">
+                                    <div class="list">
+                                        <div class="item" name="type-id" value="ID">ID</div>
+                                        <div class="item" name="type-id" value="Paspor">Paspor</div>
+                                    </div>
+                                    <label for="type-id">Identity</label>
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
                             </div>
                             <div class="form-input identity">
-                                <input name="identity" id="identity" type="text" placeholder="ID Number">
+                                <div class="field">
+                                    <input name="identity" id="identity" type="text" autocomplete="off">
+                                    <label for="identity">ID Number</label>
+                                </div>
                             </div>
                             <div class="form-input phone">
-                                <input type="text" name="number-phone" id="number-phone" placeholder="Mobile Number">
-                                <label for="number-phone">Mobile Number</label>
+                                <div class="field">
+                                    <input type="text" name="number-phone" id="number-phone" autocomplete="off">
+                                    <label for="number-phone">Mobile Number</label>
+                                </div>
                             </div>
                             <div class="form-input email">
-                                <input type="text" name="email" id="email" placeholder="Email">
-                                <label for="email">Email</label>
+                                <div class="field">
+                                    <input type="text" name="email" id="email" autocomplete="off">
+                                    <label for="email">Email</label>
+                                </div>
                             </div>
-
+                        </div>
+                        <div class="notice-order">
+                            <h3>Conditions for Reserving Train Tickets</h3>
+                            <div class="notice-list">
+                                <ul>
+                                    <li>1. Reservations can be made 3 hours before the train departs.</li>
+                                    <li>2. Prices and seat availability are subject to change.</li>
+                                    <li>3. PT. Train Venture to be exchanged for boarding passes at online stations.</li>
+                                </ul>
+                            </div>
+                            <div class="check-agreed">
+                                <input type="checkbox" id="notice-check">
+                                <label for="notice-check">By clicking the button, you have agreed to PT. Train Venture <span>Terms & Conditions</span>.</label>
+                            </div>
+                            <div class="submit-data"><button type="submit" id="submit">CHECK OUT</button></div>
                         </div>
                     </form>
+                    <div class="summary-ticket">
+                        <div class="summary-trip">
+                            <div class="trip-head"><h2>Train</h2></div>
+                            <div class="trip-content depart">
+                                <img class="trip-icon" src="/train-ticket/public/images/Icon.ico" alt="">
+                                <div class="station-trip">
+                                    <div class="stasion-name list-horizontal">Surabaya Gubeng</div>
+                                    <div class="journey-icon list-horizontal"><i class="fa-solid fa-arrow-right"></i></div>
+                                    <div class="stasion-name list-horizontal">Pasar Senen</div>
+                                </div>
+                                <div class="detail-trip">
+                                    <div class="class-train">Ekonomi</div>
+                                    <div class="list-horizontal"><div class="icon-line"></div></div>
+                                    <div class="time-trip">12:00</div>
+                                    <div class="list-horizontal"><div class="icon-line"></div></div>
+                                    <div class="date-trip"></div>
+                                </div>
+                            </div>
+                            
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
+    
+    <script src="/train-ticket/public/javascripts/passenger-form.js"></script>
 </body>
 </html>

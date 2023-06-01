@@ -17,17 +17,9 @@ changeBtn.addEventListener("click", function() {
 });
 
 /*-----replace kembali search preview----*/
-var SearchPage = document.querySelector('.search-change');
 var searchBtn = document.getElementById("search-ticket");
 
 searchBtn.addEventListener("click", function() {
-    document.addEventListener('click', function(event) {
-        if (!SearchPage.contains(event.target)) {
-            var divBaru = document.querySelector('.overlay-searchpage');
-            divBaru.remove();
-        }
-      });
-
     var divBaru = document.querySelector('.overlay-searchpage');
     divBaru.remove();
 });
