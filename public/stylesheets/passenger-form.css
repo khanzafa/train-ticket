@@ -192,7 +192,7 @@ ol{
     display: flex;
     align-items: center;
     width: 60%;
-    padding: 20px 40px;
+    padding: 20px 20px 20px 40px;
 }
 
 .form-passenger{
@@ -392,10 +392,16 @@ ol{
     cursor: pointer;
 }
 
+.trip-content{
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
 .trip-content img{
-    float: left;
-    width: 20px;
-    height: 20px;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
     display: flex;
     align-items: center;
     display: inline-block;
@@ -420,12 +426,79 @@ ol{
     margin: 0 5px;
 }
 
+.summary-ticket{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    padding: 20px 40px 20px 20px;
+    width: 40%;
+}
+
 .summary-trip{
     position: relative;
     padding: 20px;
     border-radius: 5px;
     background: #ffffff;
-    padding-top: 40px;
-    width: 412px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
 }
 
+.schedule-trip{
+    margin-bottom: 25px;
+}
+
+.journey-icon{
+    padding: 0 5px;
+}
+
+.stasion-name, .time-trip{
+    font-weight: bold;
+}
+
+.class-train, .time-trip, .date-trip{
+    font-size: 13px;
+}
+
+.sum-detail{
+    border-top: solid 1px;
+    padding-top: 10px;
+}
+
+.sum-detail h2{
+    padding-bottom: 5px;
+}
+
+.detail-sum{
+    padding-bottom: 12px;
+    font-size: 14px;
+    color: #58627a;
+}
+
+.head-sum{
+    color: rgb(62, 62, 62);
+    font-weight: bold;
+}
+
+.sub-sum{
+    display: flex;
+    width: 100%;
+}
+
+.ket-sum{
+    float: left;
+    width: 50%;
+}
+
+.price-sum{
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+
+.total-payment{
+    padding: 20px 0;
+    border-top: solid 1px black;
+    font-weight: bold
+}
