@@ -64,7 +64,7 @@ html(lang='en')
         .nav-btn
         .nav-btn
         .nav-btn
-    form#search-page.search-container(action="searching" method="post")
+    form#search-page.search-container(action="searching-go" method="post")
       .train-form
         .header-form
           .icon
@@ -87,11 +87,11 @@ html(lang='en')
               input.form-control(placeholder='Stasiun Tujuan', type='text', name="arrival_station", id="arrival_station")
           .form-component.depart
             .title
-              label Departure
+              label Go
             .input-group
               .icon
                 i.fa-solid.fa-calendar
-              input.form-control(type='date', name="departure_date", id="departure_date")
+              input.form-control(type='date', name="go_date", id="go_date")
           .form-component.return
             .title
               .check

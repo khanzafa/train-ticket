@@ -1,3 +1,4 @@
+doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
@@ -50,37 +51,25 @@ html(lang='en')
         .search-preview
           .content-preview
             .preview-column
-              .selected-ticket
+              .content-box
                 .list-horizontal
-                  .checked-icon
-                    i.fa-regular.fa-circle-check
+                  .train-icon
+                    i.fa-solid.fa-train
                 .text-section.list-horizontal
-                  .from-station Surabaya Gubeng
-                  .to-station.list-horizontal
-                    p To Pasar Senen
-                  .date-station 2023/06/01
-                  .price-ticket IDR 360.000
-              .choose-ticket
-                .border-left
-                .content-box
-                  .list-horizontal
-                    .train-icon
-                      i.fa-solid.fa-train
-                  .text-section.list-horizontal
-                    .header-section Return Train Ticket
-                    .list-preview
-                      .stasion-name.list-horizontal Pasar Senen
-                      .journey-icon.list-horizontal
-                        i.fa-solid.fa-arrow-right
-                      .stasion-name.list-horizontal Surabaya Gubeng
-                      .list-horizontal
-                        .icon-line
-                      .journey-date.list-horizontal 2023/06/02
-                      .list-horizontal
-                        .icon-line
-                      .passenger.list-horizontal 1 Passenger
+                  .header-section Departure Train Ticket
+                  .list-preview
+                    .stasion-name.list-horizontal #{tickets[0].departure_station}
+                    .journey-icon.list-horizontal
+                      i.fa-solid.fa-arrow-right
+                    .stasion-name.list-horizontal #{tickets[0].arrival_station} 
+                    .list-horizontal
+                      .icon-line
+                    .journey-date.list-horizontal #{tickets[0].departure_date}
+                    .list-horizontal
+                      .icon-line
+                    .passenger.list-horizontal #{passenger} Passenger
             .change-preview
-              button#change-btn Change Destination
+              a(href="booking") Change Destination 
         .result-ticket
           .content-ticket
             .column-ticket
@@ -93,49 +82,61 @@ html(lang='en')
                       td.duration Duration
                       td.to-station To
                       td.price Price
-              .available-ticket
-                table.position
-                  tbody
-                    tr
-                      td.train-name
-                        .text-train-name Gaya Baru Malam Selatan 105
-                        .text-train-class Economy
-                      td.from-station
-                        .text-station Pasar Senen
-                        .time-station 12:00
-                        .date-station 2 June 2023
-                      td.duration
-                        .time-duration 13h 20m
-                      td.to-station
-                        .text-station Surabaya Gubeng
-                        .time-station 01:00
-                        .date-station 3 June 2023
-                      td.price
-                        .seat Available
-                        .price-tag IDR 360.000
-                        .order-btn
-                          button ORDER
-              .sold-ticket
-                table.position
-                  tbody
-                    tr
-                      td.train-name
-                        .text-train-name Gaya Baru Malam Selatan 105
-                        .text-train-class Economy
-                      td.from-station
-                        .text-station Pasar Senen
-                        .time-station 12:00
-                        .date-station 2 June 2023
-                      td.duration
-                        .time-duration 13h 20m
-                      td.to-station
-                        .text-station Surabaya Gubeng
-                        .time-station 01:00
-                        .date-station 3 June 2023
-                      td.price
-                        .text-sold Sold Out
-                        .order-btn
-                          button ORDER
+              each ticket in tickets                
+                if ticket.status !== 'SOLD_OUT'                  
+                  .available-ticket                     
+                      table.position
+                        tbody                    
+                            tr
+                              td.train-name
+                                .text-train-name #{ticket.train_name}
+                                .text-train-class #{ticket.Train.class}
+                              td.from-station
+                                .text-station #{ticket.departure_station}
+                                .time-station #{ticket.departure_time}
+                                .date-station #{ticket.departure_date}
+                              td.duration
+                                .time-duration #{ticket.duration}
+                              td.to-station
+                                .text-station #{ticket.arrival_station}
+                                .time-station #{ticket.arrival_time}
+                                .date-station #{ticket.arrival_date}
+                              td.price
+                                .seat AVAILABLE 
+                                .price-tag IDR #{ticket.price}
+                                form(action="booking", method="post")  
+                                  input(type="hidden", name="ticket_id", value=ticket.ticket_id)
+                                  input(type="hidden", name="train_name", value=ticket.train_name)
+                                  input(type="hidden", name="departure_station", value=ticket.departure_station)
+                                  input(type="hidden", name="arrival_station", value=ticket.arrival_station)
+                                  input(type="hidden", name="departure_date", value=ticket.departure_date)
+                                  input(type="hidden", name="passenger", value=passenger)
+                                  .order-btn                                                                      
+                                    button(type="submit") ORDER
+              each ticket in tickets
+                if ticket.status === 'SOLD_OUT'             
+                  .sold-ticket
+                    table.position
+                      tbody
+                        tr
+                          td.train-name
+                            .text-train-name #{ticket.train_name}
+                            .text-train-class #{ticket.Train.class}
+                          td.from-station
+                            .text-station #{ticket.departure_station}
+                            .time-station #{ticket.departure_time}
+                            .date-station #{ticket.departure_date}
+                          td.duration
+                            .time-duration #{ticket.duration}
+                          td.to-station
+                            .text-station #{ticket.arrival_station}
+                            .time-station #{ticket.arrival_time}
+                            .date-station #{ticket.arrival_date}
+                          td.price
+                            .text-sold SOLD OUT
+                            .price-tag IDR #{ticket.price}
+                            .order-btn
+                              button(type="submit") ORDER
     footer
       .footer
         .row

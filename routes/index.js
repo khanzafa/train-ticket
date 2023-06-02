@@ -74,20 +74,22 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/search', function (req, res, next){
-  res.render('booking');
-});
 
-router.post('/search', async (req, res) => {
+router.get('/searching', function (req, res, next){
+  res.render('searching');
+});
+router.post('/searching-go', async (req, res) => {
   try{
     const Ticket = req.app.get("Ticket");
     const Train = req.app.get("Train");
     const Station = req.app.get("Station");
     const Booking = req.app.get("Booking");      
-    const { departure_station, arrival_station, departure_date, return_date, passenger } = req.body;
+    const { departure_station, arrival_station, go_date, return_date, passenger } = req.body;
     const tickets = await Ticket.findAll({
       where: {
-        departure_station, arrival_station, departure_date,
+        departure_station,
+        arrival_station, 
+        departure_date: go_date,
       },
       include: [
         {
@@ -98,7 +100,29 @@ router.post('/search', async (req, res) => {
         },
       ],    
     });
-    const return_ticket = await Ticket.findAll({
+    
+    if (return_date) {
+      res.render('go-return-ticket', { tickets, passenger, return_date });      
+    } else {
+      res.render('go-ticket', { tickets, passenger });
+    }          
+      
+  }catch(err){
+    console.error('Error retrieving train tickets: ', err);
+    res.status(500).send('Error retrieving train tickets');
+  }
+});
+
+router.post('/searching-return', async(req, res)=>{
+  try {
+    const { departure_station, arrival_station, ticket_id, return_date, passenger} = req.body;
+    const Ticket = req.app.get("Ticket");
+    const Train = req.app.get("Train");
+    const Station = req.app.get("Station");
+    const go_ticket = await Ticket.findOne({
+      where:{ ticket_id },
+    });
+    const return_tickets = await Ticket.findAll({
       where: {
         departure_station: arrival_station, 
         arrival_station: departure_station, 
@@ -113,37 +137,44 @@ router.post('/search', async (req, res) => {
         },
       ],    
     });
-    if (return_date) {
-      res.render('search-result-return', { return_ticket, passenger }); 
-    } else {
-      res.render('search-result-without-return', { tickets, passenger });
-    }          
-      
-  }catch(err){
-    console.error('Error retrieving train tickets: ', err);
-    res.status(500).send('Error retrieving train tickets');
-  }
+    res.render('return-ticket', {go_ticket, return_tickets, return_date, passenger});    
+  } catch (error) {
+      console.error('Error retrieving train tickets: ', error);
+      res.status(500).send('Error retrieving train tickets');
+  }  
 });
+
 
 router.post('/booking', async (req, res) => {
   try {
     const { ticket_id, train_name, departure_station, arrival_station, passenger } = req.body;
     const Ticket = req.app.get("Ticket");
     const Train = req.app.get("Train");
-    const Station = req.app.get("Station");
-    // Ambil data tiket berdasarkan ticket_id
+    const Station = req.app.get("Station");    
     const ticket = await Ticket.findOne({ where: { ticket_id } });
-
-    // Ambil data kereta berdasarkan train_name
     const train = await Train.findOne({ where: { train_name } });
-
-    // Ambil data stasiun keberangkatan berdasarkan departure_station
     const departureStation = await Station.findOne({ where: { station_name: departure_station } });
-
-    // Ambil data stasiun tujuan berdasarkan arrival_station
     const arrivalStation = await Station.findOne({ where: { station_name: arrival_station } });
 
     res.render('passenger-form', { ticket, train, departureStation, arrivalStation, passenger });
+  } catch (err) {
+    console.error('Error retrieving train tickets: ', err);
+    res.status(500).send('Error retrieving train tickets');
+  }
+});
+
+
+router.post('/booking-return', async (req, res) => {
+  try {
+    const { go_ticket_id, return_ticket_id, train_name, passenger} = req.body;
+    const Ticket = req.app.get("Ticket");
+    const Train = req.app.get("Train");    
+    
+    const go_ticket = await Ticket.findOne({where: {ticket_id: go_ticket_id}})
+    const return_ticket = await Ticket.findOne({ where: { ticket_id: return_ticket_id } });    
+    const return_train = await Train.findOne({ where: { train_name } });        
+
+    res.render('passenger-form-with-return', { go_ticket, return_ticket, return_train, passenger });
   } catch (err) {
     console.error('Error retrieving train tickets: ', err);
     res.status(500).send('Error retrieving train tickets');
@@ -161,6 +192,7 @@ router.post('/checkout', async (req, res) => {
     res.status(500).send('Error retrieving train tickets');
   }   
 });
+
 
 router.get('/', function(req, res, next){
   res.render('landing');

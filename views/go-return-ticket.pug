@@ -59,21 +59,21 @@ html(lang='en')
                   .text-section.list-horizontal
                     .header-section Departure Train Ticket
                     .list-preview
-                      .stasion-name.list-horizontal Surabaya Gubeng
+                      .stasion-name.list-horizontal #{tickets[0].departure_station}
                       .journey-icon.list-horizontal
                         i.fa-solid.fa-arrow-right
-                      .stasion-name.list-horizontal Pasar Senen
+                      .stasion-name.list-horizontal #{tickets[0].arrival_station}
                       .list-horizontal
                         .icon-line
-                      .journey-date.list-horizontal 2023/06/01
+                      .journey-date.list-horizontal #{tickets[0].departure_date}
                       .list-horizontal
                         .icon-line
-                      .passenger.list-horizontal 1 Passenger
+                      .passenger.list-horizontal #{passenger} Passenger
               .return-preview
                 .border-left
                 .header-section Return Train Ticket
             .change-preview
-              button#change-btn Change Destination
+              a(href="booking") Change Destination
         .result-ticket
           .content-ticket
             .column-ticket
@@ -108,13 +108,14 @@ html(lang='en')
                               td.price
                                 .seat AVAILABLE 
                                 .price-tag IDR #{ticket.price}
-                                form(action="order", method="post")  
+                                form(action="searching-return", method="post")  
                                   input(type="hidden", name="ticket_id", value=ticket.ticket_id)
                                   input(type="hidden", name="train_name", value=ticket.train_name)
                                   input(type="hidden", name="departure_station", value=ticket.departure_station)
                                   input(type="hidden", name="arrival_station", value=ticket.arrival_station)
                                   input(type="hidden", name="departure_date", value=ticket.departure_date)
                                   input(type="hidden", name="passenger", value=passenger)
+                                  input(type="hidden", name="return_date", value=return_date)
                                   .order-btn                                                                      
                                     button(type="submit") ORDER
               each ticket in tickets
@@ -140,7 +141,7 @@ html(lang='en')
                             .text-sold SOLD OUT
                             .price-tag IDR #{ticket.price}
                             .order-btn
-                              button(type="submit", action="order", method="post") ORDER
+                              button(type="submit") ORDER
     footer
       .footer
         .row

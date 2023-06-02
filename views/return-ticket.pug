@@ -1,4 +1,3 @@
-doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
@@ -51,25 +50,37 @@ html(lang='en')
         .search-preview
           .content-preview
             .preview-column
-              .content-box
+              .selected-ticket
                 .list-horizontal
-                  .train-icon
-                    i.fa-solid.fa-train
+                  .checked-icon
+                    i.fa-regular.fa-circle-check
                 .text-section.list-horizontal
-                  .header-section Departure Train Ticket
-                  .list-preview
-                    .stasion-name.list-horizontal #{tickets[0].departure_station}
-                    .journey-icon.list-horizontal
-                      i.fa-solid.fa-arrow-right
-                    .stasion-name.list-horizontal #{tickets[0].arrival_station} 
-                    .list-horizontal
-                      .icon-line
-                    .journey-date.list-horizontal #{tickets[0].departure_date}
-                    .list-horizontal
-                      .icon-line
-                    .passenger.list-horizontal #{passenger} Passenger
+                  .from-station #{go_ticket.departure_station}
+                  .to-station.list-horizontal
+                    p To #{go_ticket.arrival_station}
+                  .date-station #{go_ticket.departure_date}
+                  .price-ticket IDR #{go_ticket.price}
+              .choose-ticket
+                .border-left
+                .content-box
+                  .list-horizontal
+                    .train-icon
+                      i.fa-solid.fa-train
+                  .text-section.list-horizontal
+                    .header-section Return Train Ticket
+                    .list-preview
+                      .stasion-name.list-horizontal #{return_tickets[0].departure_station}
+                      .journey-icon.list-horizontal
+                        i.fa-solid.fa-arrow-right
+                      .stasion-name.list-horizontal #{return_tickets[0].arrival_station}
+                      .list-horizontal
+                        .icon-line
+                      .journey-date.list-horizontal #{return_tickets[0].departure_date}
+                      .list-horizontal
+                        .icon-line
+                      .passenger.list-horizontal #{passenger} Passenger
             .change-preview
-              a(href="booking") Change Destination 
+              a(href="booking") Change Destination
         .result-ticket
           .content-ticket
             .column-ticket
@@ -82,7 +93,7 @@ html(lang='en')
                       td.duration Duration
                       td.to-station To
                       td.price Price
-              each ticket in tickets                
+              each ticket in return_tickets                
                 if ticket.status !== 'SOLD_OUT'                  
                   .available-ticket                     
                       table.position
@@ -104,16 +115,17 @@ html(lang='en')
                               td.price
                                 .seat AVAILABLE 
                                 .price-tag IDR #{ticket.price}
-                                form(action="order", method="post")  
-                                  input(type="hidden", name="ticket_id", value=ticket.ticket_id)
+                                form(action="booking-return", method="post")  
+                                  input(type="hidden", name="go_ticket_id", value=go_ticket.ticket_id)
+                                  input(type="hidden", name="return_ticket_id", value=ticket.ticket_id)
                                   input(type="hidden", name="train_name", value=ticket.train_name)
                                   input(type="hidden", name="departure_station", value=ticket.departure_station)
                                   input(type="hidden", name="arrival_station", value=ticket.arrival_station)
                                   input(type="hidden", name="departure_date", value=ticket.departure_date)
-                                  input(type="hidden", name="passenger", value=passenger)
+                                  input(type="hidden", name="passenger", value=passenger)                                  
                                   .order-btn                                                                      
                                     button(type="submit") ORDER
-              each ticket in tickets
+              each ticket in return_tickets
                 if ticket.status === 'SOLD_OUT'             
                   .sold-ticket
                     table.position
@@ -136,7 +148,7 @@ html(lang='en')
                             .text-sold SOLD OUT
                             .price-tag IDR #{ticket.price}
                             .order-btn
-                              button(type="submit", action="order", method="post") ORDER
+                              button(type="submit") ORDER
     footer
       .footer
         .row
