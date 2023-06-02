@@ -10,6 +10,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 const {Sequelize, DataTypes} = require('sequelize');
 const session = require('express-session');
+
 // Konfigurasi koneksi database
 const sequelize = new Sequelize('ticket', 'khanza', 'tiwiCute04', {
   host: 'localhost',
@@ -51,13 +52,9 @@ const User = sequelize.define('User', {
 }, {
   timestamps:false,
 });
-
-//Generate a UUID before creating a new user
 User.beforeCreate((user, _) =>{
   user.user_id = uuidv4();
 });
-
-// Hook to hash the password before saving
 const bcrypt = require('bcrypt');
 User.beforeCreate(async (user)=>{
   const hashedPassword = await bcrypt.hash(user.password, 10);
@@ -66,29 +63,151 @@ User.beforeCreate(async (user)=>{
 
 //MODEL TICKET
 const Ticket = sequelize.define("Ticket", {
-  ticket_id : {
+  ticket_id: {
     type: DataTypes.NUMBER,
     allowNull: false,
-    primaryKey: true
-  }, 
-  train_id : {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  }, 
-  departure_station_id : {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  }, 
-  arrival_station_id : {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  }, 
-  date : {
+    primaryKey: true,
+  },
+  train_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  departure_station: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  departure_time: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  departure_date: {
     type: DataTypes.DATEONLY,
-    allowNull: false
+    allowNull: false,
+  },
+  duration: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  arrival_station: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  arrival_time: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  arrival_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
+  },
+  price: {
+    type: DataTypes.FLOAT,
+    allowNull: false,
+  },
+  quantity: {
+    type: DataTypes.NUMBER,
+    allowNull: false,
+  },
+  status: {
+    type: DataTypes.ENUM('AVAILABLE', 'SOLD OUT'),
+    allowNull: false,
+  },
+}, {
+  timestamps: false,
+});
+
+
+//MODEL STATION
+const Station = sequelize.define("Station", {
+  station_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true    
+  },
+  district_city: {
+    type: DataTypes.STRING,
+    allowNull: false    
   }
 }, {
   timestamps:false,
+});
+
+//MODEL TRAIN
+const Train = sequelize.define("Train", {  
+  train_name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    primaryKey: true    
+  },
+  capacity: {
+    type: DataTypes.STRING,
+    allowNull: false    
+  },
+  class: {
+    type: DataTypes.STRING,
+    allowNull: false    
+  },
+}, {
+  timestamps:false,
+});
+
+//MODEL BOOKING
+const Booking = sequelize.define("Booking", {
+  booking_id: {
+    type: DataTypes.NUMBER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true    
+  },
+  user_id: {
+    type: DataTypes.NUMBER,
+    allowNull: false,
+    references: {
+      model: 'Users',
+      key: 'user_id'
+    }  
+  },
+  ticket_id: {
+    type: DataTypes.NUMBER,
+    allowNull: false,
+    references: {
+      model: 'Tickets',
+      key: 'ticket_id'
+    }
+  },
+  passenger: {
+    type: DataTypes.NUMBER,
+    allowNull: false
+  },
+  booking_date: {
+    type: DataTypes.DATEONLY,
+    allowNull: false    
+  },
+  payment_status: {
+    type: DataTypes.ENUM('PENDING', 'PAID'),
+    allowNull: false    
+  }
+}, {
+  timestamps:false,
+});
+
+Ticket.belongsTo(Train, {
+  foreignKey: 'train_name',
+});
+Ticket.belongsTo(Station, {
+  foreignKey: 'departure_station',
+});
+Ticket.belongsTo(Station, {
+  foreignKey: 'arrival_station',
+});
+Train.hasMany(Ticket, {
+  foreignKey: 'train_name',
+});
+Station.hasMany(Ticket, {
+  foreignKey: 'departure_station',
+});
+Station.hasMany(Ticket, {
+  foreignKey: 'arrival_station',
 });
 
 // Synchronize the model with the database
@@ -131,4 +250,7 @@ app.use(function(err, req, res, next) {
 
 app.set('User', User);
 app.set('Ticket', Ticket);
+app.set('Train', Train);
+app.set('Station', Station);
+app.set('Booking', Booking);
 module.exports = app;

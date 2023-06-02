@@ -4,7 +4,7 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/train-ticket/public/stylesheets/search-result.css')
+    link(rel='stylesheet', href='/stylesheets/search-result.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css')
     title TrainVenture
@@ -13,7 +13,7 @@ html(lang='en')
       nav.menu
         span.logo
           a(href='#')
-            img(src='/train-ticket/public/images/Icon.ico', width='30', height='30')
+            img(src='/images/Icon.ico', width='30', height='30')
         span.search
           a(href='#')
             svg(xmlns='http://www.w3.org/2000/svg', xmlns:xlink='http://www.w3.org/1999/xlink', version='1.1', x='0px', y='0px', viewBox='0 0 100 125', enable-background='new 0 0 100 100', xml:space='preserve')
@@ -58,18 +58,18 @@ html(lang='en')
                 .text-section.list-horizontal
                   .header-section Departure Train Ticket
                   .list-preview
-                    .stasion-name.list-horizontal Surabaya Gubeng
+                    .stasion-name.list-horizontal #{tickets[0].departure_station}
                     .journey-icon.list-horizontal
                       i.fa-solid.fa-arrow-right
-                    .stasion-name.list-horizontal Pasar Senen
+                    .stasion-name.list-horizontal #{tickets[0].arrival_station} 
                     .list-horizontal
                       .icon-line
-                    .journey-date.list-horizontal 2023/06/01
+                    .journey-date.list-horizontal #{tickets[0].departure_date}
                     .list-horizontal
                       .icon-line
-                    .passenger.list-horizontal 1 Passenger
+                    .passenger.list-horizontal #{passenger} Passenger
             .change-preview
-              button#change-btn Change Destination
+              a(href="booking") Change Destination 
         .result-ticket
           .content-ticket
             .column-ticket
@@ -82,49 +82,61 @@ html(lang='en')
                       td.duration Duration
                       td.to-station To
                       td.price Price
-              .available-ticket
-                table.position
-                  tbody
-                    tr
-                      td.train-name
-                        .text-train-name Gaya Baru Malam Selatan 105
-                        .text-train-class Economy
-                      td.from-station
-                        .text-station Surabaya Gubeng
-                        .time-station 12:00
-                        .date-station 1 June 2023
-                      td.duration
-                        .time-duration 13h 20m
-                      td.to-station
-                        .text-station Pasar Senen
-                        .time-station 01:20
-                        .date-station 2 June 2023
-                      td.price
-                        .seat Available
-                        .price-tag IDR 360.000
-                        .order-btn
-                          button ORDER
-              .sold-ticket
-                table.position
-                  tbody
-                    tr
-                      td.train-name
-                        .text-train-name Gaya Baru Malam Selatan 105
-                        .text-train-class Economy
-                      td.from-station
-                        .text-station Surabaya Gubeng
-                        .time-station 12:00
-                        .date-station 1 June 2023
-                      td.duration
-                        .time-duration 13h 20m
-                      td.to-station
-                        .text-station Pasar Senen
-                        .time-station 01:20
-                        .date-station 2 June 2023
-                      td.price
-                        .text-sold Sold Out
-                        .order-btn
-                          button ORDER
+              each ticket in tickets                
+                if ticket.status !== 'SOLD_OUT'                  
+                  .available-ticket                     
+                      table.position
+                        tbody                    
+                            tr
+                              td.train-name
+                                .text-train-name #{ticket.train_name}
+                                .text-train-class #{ticket.Train.class}
+                              td.from-station
+                                .text-station #{ticket.departure_station}
+                                .time-station #{ticket.departure_time}
+                                .date-station #{ticket.departure_date}
+                              td.duration
+                                .time-duration #{ticket.duration}
+                              td.to-station
+                                .text-station #{ticket.arrival_station}
+                                .time-station #{ticket.arrival_time}
+                                .date-station #{ticket.arrival_date}
+                              td.price
+                                .seat AVAILABLE 
+                                .price-tag IDR #{ticket.price}
+                                form(action="order", method="post")  
+                                  input(type="hidden", name="ticket_id", value=ticket.ticket_id)
+                                  input(type="hidden", name="train_name", value=ticket.train_name)
+                                  input(type="hidden", name="departure_station", value=ticket.departure_station)
+                                  input(type="hidden", name="arrival_station", value=ticket.arrival_station)
+                                  input(type="hidden", name="departure_date", value=ticket.departure_date)
+                                  input(type="hidden", name="passenger", value=passenger)
+                                  .order-btn                                                                      
+                                    button(type="submit") ORDER
+              each ticket in tickets
+                if ticket.status === 'SOLD_OUT'             
+                  .sold-ticket
+                    table.position
+                      tbody
+                        tr
+                          td.train-name
+                            .text-train-name #{ticket.train_name}
+                            .text-train-class #{ticket.Train.class}
+                          td.from-station
+                            .text-station #{ticket.departure_station}
+                            .time-station #{ticket.departure_time}
+                            .date-station #{ticket.departure_date}
+                          td.duration
+                            .time-duration #{ticket.duration}
+                          td.to-station
+                            .text-station #{ticket.arrival_station}
+                            .time-station #{ticket.arrival_time}
+                            .date-station #{ticket.arrival_date}
+                          td.price
+                            .text-sold SOLD OUT
+                            .price-tag IDR #{ticket.price}
+                            .order-btn
+                              button(type="submit", action="order", method="post") ORDER
     footer
       .footer
         .row
@@ -148,4 +160,4 @@ html(lang='en')
               a(href='#') Terms &amp; Conditions
         .row
           | TrainVenture Copyright &copy; 2023 TrainVenture - All rights reserved
-    script(src='/train-ticket/public/javascripts/search-result.js')
+    script(src='/javascripts/search-result.js')

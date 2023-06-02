@@ -4,7 +4,7 @@ html(lang='en')
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='/stylesheets/booking.css')
+    link(rel='stylesheet', href='/stylesheets/searching.css')
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css')
     link(href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;200;300;400;500;600;700;800;900&display=swap', rel='stylesheet')
     title TrainVenture
@@ -64,7 +64,7 @@ html(lang='en')
         .nav-btn
         .nav-btn
         .nav-btn
-    form#search-page.search-container(action="booking" method="post")
+    form#search-page.search-container(action="searching" method="post")
       .train-form
         .header-form
           .icon
@@ -77,21 +77,21 @@ html(lang='en')
             .input-group
               .icon
                 i.fa-solid.fa-train
-              input.form-control(placeholder='Kota atau Stasiun Asal', type='text', name="departure_station_id", id="departure_station_id")
+              input.form-control(placeholder='Kota atau Stasiun Asal', type='text', name="departure_station", id="departure_station")
           .form-component.to
             .title
               label To
             .input-group
               .icon
                 i.fa-solid.fa-train
-              input.form-control(placeholder='Stasiun Tujuan', type='text', name="arrival_station_id", id="arrival_station_id")
+              input.form-control(placeholder='Stasiun Tujuan', type='text', name="arrival_station", id="arrival_station")
           .form-component.depart
             .title
               label Departure
             .input-group
               .icon
                 i.fa-solid.fa-calendar
-              input.form-control(type='date', name="date", id="date")
+              input.form-control(type='date', name="departure_date", id="departure_date")
           .form-component.return
             .title
               .check
@@ -100,18 +100,12 @@ html(lang='en')
             .input-group
               .icon
                 i.fa-solid.fa-calendar
-              input#input.form-control(type='date', disabled='')
+              input#input.form-control(type='date', name="return_date", disabled='')
           .form-component.passenger
             .title
               label Passenger
-            .input-group
-              .btn
-                button#minus.disabled
-                  i.fa-solid.fa-minus
-              input#counter(type='text', value='1', readonly='')
-              .btn
-                button#plus
-                  i.fa-solid.fa-plus
+            .input-group              
+              input#counter(value="1", type='number', name="passenger")            
         .footer-form
           button(type="submit") Cari Tiket
     script(src='/javascripts/booking.js')

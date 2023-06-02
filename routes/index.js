@@ -74,40 +74,92 @@ router.get('/logout', function(req, res, next) {
   res.redirect('/login');
 });
 
-router.get('/booking', function (req, res, next){
+router.get('/search', function (req, res, next){
   res.render('booking');
 });
 
-router.post('/booking', async (req, res) => {
+router.post('/search', async (req, res) => {
   try{
-    const Ticket = req.app.get("Ticket");  
-    const { departure_station_id, arrival_station_id, date } = req.body;
+    const Ticket = req.app.get("Ticket");
+    const Train = req.app.get("Train");
+    const Station = req.app.get("Station");
+    const Booking = req.app.get("Booking");      
+    const { departure_station, arrival_station, departure_date, return_date, passenger } = req.body;
     const tickets = await Ticket.findAll({
-      where:{
-        departure_station_id, arrival_station_id, date,
+      where: {
+        departure_station, arrival_station, departure_date,
       },
+      include: [
+        {
+          model: Train,          
+        },
+        {
+          model: Station          
+        },
+      ],    
     });
-    res.json(tickets);
+    const return_ticket = await Ticket.findAll({
+      where: {
+        departure_station: arrival_station, 
+        arrival_station: departure_station, 
+        departure_date: return_date,
+      },
+      include: [
+        {
+          model: Train,          
+        },
+        {
+          model: Station          
+        },
+      ],    
+    });
+    if (return_date) {
+      res.render('search-result-return', { return_ticket, passenger }); 
+    } else {
+      res.render('search-result-without-return', { tickets, passenger });
+    }          
+      
   }catch(err){
     console.error('Error retrieving train tickets: ', err);
     res.status(500).send('Error retrieving train tickets');
   }
+});
 
-  // const query = `
-  //   SELECT * FROM Tickets
-  //   WHERE departure_station_id = ${departure_station_id}
-  //   AND arrival_station_id = ${arrival_station_id}
-  //   AND date = '${date}'
-  // `;
+router.post('/booking', async (req, res) => {
+  try {
+    const { ticket_id, train_name, departure_station, arrival_station, passenger } = req.body;
+    const Ticket = req.app.get("Ticket");
+    const Train = req.app.get("Train");
+    const Station = req.app.get("Station");
+    // Ambil data tiket berdasarkan ticket_id
+    const ticket = await Ticket.findOne({ where: { ticket_id } });
 
-  // router.query(query, (err, results) => {
-  //   if (err) {
-  //     console.error('Error executing the query: ', err);
-  //     res.status(500).send('Error retrieving train tickets');
-  //     return;
-  //   }
+    // Ambil data kereta berdasarkan train_name
+    const train = await Train.findOne({ where: { train_name } });
 
-  // res.json(results);
+    // Ambil data stasiun keberangkatan berdasarkan departure_station
+    const departureStation = await Station.findOne({ where: { station_name: departure_station } });
+
+    // Ambil data stasiun tujuan berdasarkan arrival_station
+    const arrivalStation = await Station.findOne({ where: { station_name: arrival_station } });
+
+    res.render('passenger-form', { ticket, train, departureStation, arrivalStation, passenger });
+  } catch (err) {
+    console.error('Error retrieving train tickets: ', err);
+    res.status(500).send('Error retrieving train tickets');
+  }
+});
+
+
+router.post('/checkout', async (req, res) => {
+  try{    
+    // const { ticket_id, train_name, departure_station, arrival_station, departure_date, passenger } = req.session.bookingData;
+    const passengerData = req.body;
+    res.json(passengerData);
+  }catch(err){
+    console.error('Error retrieving train tickets: ', err);
+    res.status(500).send('Error retrieving train tickets');
+  }   
 });
 
 router.get('/', function(req, res, next){
