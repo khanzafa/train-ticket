@@ -65,8 +65,8 @@ ol{
 .search {
 	float: right;
 	position: absolute;
-	top: 25px;
-	right: 2rem;
+	top: 20px;
+	right: 35px;
 	stroke: #333;
 	width: 20px;
 	height: 20px;
