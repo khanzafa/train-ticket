@@ -16,24 +16,28 @@ router.get('/login', function(req, res, next) {
 router.post('/login', async(req, res) => {
   try {
     const {email, password} = req.body;    
-    const User = req.app.get('User');
-    const user = await User.findOne({where:{email}});
-        
-    if(!user){
-      return res.status(404).json({message:'User tidak ditemukan'});
-    }    
-    bcrypt.compare(password, user.password, (err, result)=>{
-      if(err){
-        console.error('Error comparing passwords:', err);
-        return res.status(500).json({message: 'Error comparing passwords'});
-      }
-      if(result){        
-        req.session.user = user;                
-        res.redirect("/searching");        
-      }else{        
-        return res.status(401).json({message:'Password tidak cocok'});        
-      }
-    });
+    const User = req.app.get('User');        
+    if(email === "admin@gmail.com" && password === "admin"){
+      res.redirect("/dashboard");
+    }
+    else{
+      const user = await User.findOne({where:{email}});
+      if(!user){
+        return res.status(404).json({message:'User tidak ditemukan'});
+      }    
+      bcrypt.compare(password, user.password, (err, result)=>{
+        if(err){
+          console.error('Error comparing passwords:', err);
+          return res.status(500).json({message: 'Error comparing passwords'});
+        }
+        if(result){        
+          req.session.user = user;                
+          res.redirect("/searching");        
+        }else{        
+          return res.status(401).json({message:'Password tidak cocok'});        
+        }
+      });
+    }            
   } catch(error){
     console.error('Kesalahan saat login:', error);
     return res.status(500).json({message:'Kesalahan server'});
@@ -58,9 +62,7 @@ router.post('/register', async (req, res)=>{
 });
 
 /* DASHBOARD PAGE */
-router.get('/dashboard', function(req, res, next){
-  const user = req.session.user;
-  console.log(user.user_id);
+router.get('/dashboard', function(req, res, next){  
   res.render('dashboard');  
 });
 
@@ -77,18 +79,24 @@ router.post('/searching-go', async (req, res) => {
     const tickets = await Ticket.findAll({
       where: {
         departure_station,
-        arrival_station, 
+        arrival_station,
         departure_date: go_date,
       },
       include: [
         {
-          model: Train,          
+          model: Train,
         },
         {
-          model: Station          
+          model: Station,
+          as: 'DepartureStation', // Add the alias for the departure station association
         },
-      ],    
+        {
+          model: Station,
+          as: 'ArrivalStation', // Add the alias for the arrival station association
+        },
+      ],
     });
+    
     
     if (return_date) {
       res.render('go-return-ticket', { tickets, passenger, return_date });      
@@ -112,19 +120,17 @@ router.post('/searching-return', async(req, res)=>{
     });
     const return_tickets = await Ticket.findAll({
       where: {
-        departure_station: arrival_station, 
-        arrival_station: departure_station, 
+        departure_station: go_ticket.arrival_station, 
+        arrival_station: go_ticket.departure_station, 
         departure_date: return_date,
       },
       include: [
         {
           model: Train,          
-        },
-        {
-          model: Station          
-        },
+        },        
       ],    
     });
+    console.log(return_tickets);
     res.render('return-ticket', {go_ticket, return_tickets, return_date, passenger});    
   } catch (error) {
       console.error('Error retrieving train tickets: ', error);
@@ -155,12 +161,42 @@ router.post('/booking-return', async (req, res) => {
     const { go_ticket_id, return_ticket_id, train_name, passenger} = req.body;
     const Ticket = req.app.get("Ticket");
     const Train = req.app.get("Train");    
+    const Station = req.app.get("Station");
+    const go_ticket = await Ticket.findOne({
+      where: { ticket_id: req.body.go_ticket_id },
+      include: [
+        {
+          model: Train,
+        },
+        {
+          model: Station,
+          as: 'DepartureStation', // Add the alias for the departure station association
+        },
+        {
+          model: Station,
+          as: 'ArrivalStation', // Add the alias for the arrival station association
+        },
+      ],
+    });
     
-    const go_ticket = await Ticket.findOne({where: {ticket_id: go_ticket_id}});
-    const return_ticket = await Ticket.findOne({ where: { ticket_id: return_ticket_id } });    
-    const return_train = await Train.findOne({ where: { train_name } });        
+    const return_ticket = await Ticket.findOne({
+      where: { ticket_id: req.body.return_ticket_id },
+      include: [
+        {
+          model: Train,
+        },
+        {
+          model: Station,
+          as: 'DepartureStation', // Add the alias for the departure station association
+        },
+        {
+          model: Station,
+          as: 'ArrivalStation', // Add the alias for the arrival station association
+        },
+      ],
+    });    
 
-    res.render('passenger-form-with-return', { go_ticket, return_ticket, return_train, passenger });
+    res.render('passenger-form-with-return', { go_ticket, return_ticket, passenger });
   } catch (err) {
     console.error('Error retrieving train tickets: ', err);
     res.status(500).send('Error retrieving train tickets');
@@ -171,7 +207,7 @@ router.post('/booking-return', async (req, res) => {
 router.post('/checkout', async (req, res) => {
   try {
     const passengerData = req.body;
-    const user = req.session.user;
+    const user = 'c0b4cd07-9844-4349-8ad8-177c6beb40a8';
     const Passenger = req.app.get("Passenger");
     const Booking = req.app.get("Booking");
     const Ticket = req.app.get("Ticket");
@@ -211,7 +247,7 @@ router.post('/checkout', async (req, res) => {
       });
 
       await Booking.create({
-        user_id: user.user_id,
+        user_id: user,
         ticket_id: go_ticket.ticket_id,
         passenger_id: passenger.passenger_id,
         payment_status: 'PAID',
@@ -219,7 +255,7 @@ router.post('/checkout', async (req, res) => {
 
       if (return_ticket) {
         await Booking.create({
-          user_id: user.user_id,
+          user_id: user,
           ticket_id: return_ticket.ticket_id,
           passenger_id: passenger.passenger_id,
           payment_status: 'PAID',
@@ -229,7 +265,7 @@ router.post('/checkout', async (req, res) => {
 
     const bookings = await Booking.findAll({
       where: {
-        user_id: user.user_id,
+        user_id: user,
         ticket_id: {
           [Op.or]: [go_ticket.ticket_id, return_ticket && return_ticket.ticket_id],
         },
