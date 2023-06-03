@@ -228,24 +228,48 @@ const Booking = sequelize.define("Booking", {
   timestamps:false,
 });
 
+Booking.belongsTo(Ticket, {
+  foreignKey: 'ticket_id',  
+});
+
 Ticket.belongsTo(Train, {
-  foreignKey: 'train_name',
+  foreignKey: 'train_name',  
 });
+
 Ticket.belongsTo(Station, {
   foreignKey: 'departure_station',
+  as: 'DepartureStation',
 });
+
 Ticket.belongsTo(Station, {
   foreignKey: 'arrival_station',
+  as: 'ArrivalStation',
 });
+
+Ticket.hasMany(Booking, {
+  foreignKey: 'ticket_id',  
+});
+
 Train.hasMany(Ticket, {
-  foreignKey: 'train_name',
+  foreignKey: 'train_name',  
 });
+
 Station.hasMany(Ticket, {
   foreignKey: 'departure_station',
+  as: 'DepartureTickets',
 });
+
 Station.hasMany(Ticket, {
   foreignKey: 'arrival_station',
+  as: 'ArrivalTickets',
 });
+
+Booking.belongsTo(Passenger, {
+  foreignKey: 'passenger_id',
+});
+
+
+
 
 // Synchronize the model with the database
 sequelize.sync()

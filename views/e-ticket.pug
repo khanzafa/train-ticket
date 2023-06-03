@@ -1,15 +1,15 @@
-doctype html
 html(lang='en')
   head
     meta(charset='UTF-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/stylesheets/e-ticket.css')
-    title Document
-  body    
-  - for (var num = 1; num <= 3; num++)
-    .e-ticket    
-      .container            
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css')
+    title E-Ticket
+  body  
+  - for (var num = 0; num < bookings.length; num += 2)     
+    .e-ticket
+      .container
         .head
           .left
             img(src='/images/Icon.ico', alt='')
@@ -19,36 +19,51 @@ html(lang='en')
           .detail-passenger
             .field
               label(for='name') name
-              #name.name(name='name') Ms. Jianjing
+              #name.name(name='name') #{bookings[num].Passenger.title} #{bookings[num].Passenger.fullname}
             .field
-              label(for='identity') id number
-              #id.id(name='id') 3122500050
+              label(for='identity') identity number
+              #id.id(name='id') #{bookings[num].Passenger.passenger_id} (#{bookings[num].Passenger.type_id})
             .field
               label(for='number-phone') mobile number
-              #number-phone.number-phone(name='number-phone') 081615661176
+              #number-phone.number-phone(name='number-phone') #{bookings[num].Passenger.phone_number}
             .field
               label(for='email') email
-              #email.email(name='email') jiaracing@gmail.com
-            .field
-              label(for='class') class
-              #class.class(name='class') EKONOMI
-            .field
-              label(for='seat') seat
-              #seat.seat(name='seat') GERBONG 2 | 21A
-            .field
-              label(for='code') booking code
-              #code.code(name='code') 5678ASW
+              #email.email(name='email') #{bookings[num].Passenger.email}
           .trip
             .detail-trip.depart
-              .trip-head depart
-              .journey-trip SURABAYA GUBENG
-              .time-trip 12:00
-              .date-trip 2023/06/01
+              .trip-head go
+              .journey-trip
+                | #{bookings[num].Ticket.departure_station}
+                i.fa-solid.fa-arrow-right
+                | #{bookings[num].Ticket.arrival_station}
+              .time-trip #{bookings[num].Ticket.departure_time}
+              .date-trip #{bookings[num].Ticket.departure_date}
+              .field
+                label(for='class') class
+                #class.class(name='class') #{bookings[num].Ticket.Train.class}
+              .field
+                label(for='seat') seat
+                #seat.seat(name='seat') GERBONG 2 | 21A
+              .field
+                label(for='code') booking id
+                #code.code(name='code') #{bookings[num].booking_id}
             .detail-trip.return
               .trip-head return
-              .journey-trip PASAR SENEN
-              .time-trip 01:00
-              .date-trip 2023/06/03
-          .notice
-            p E-ticket must be shown in the boarding gate and for verifivation on the train
-        .space  
+              .journey-trip
+                | #{bookings[num+1].Ticket.departure_station}
+                i.fa-solid.fa-arrow-right
+                | #{bookings[num+1].Ticket.arrival_station}
+              .time-trip #{bookings[num+1].Ticket.departure_time}
+              .date-trip #{bookings[num+1].Ticket.departure_date}
+              .field
+                label(for='class') class
+                #class.class(name='class') #{bookings[num+1].Ticket.Train.class}
+              .field
+                label(for='seat') seat
+                #seat.seat(name='seat') GERBONG 2 | 21A
+              .field
+                label(for='code') booking id
+                #code.code(name='code') #{bookings[num+1].booking_id}
+        .notice
+          p E-ticket must be shown in the boarding gate and for verification on the train
+      .space

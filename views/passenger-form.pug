@@ -97,12 +97,11 @@ html(lang='en')
                             | By clicking the button, you have agreed to PT. Train Venture 
                             span Terms &amp; Conditions
                             | .
-                        form(action="checkout", method="post")                          
+                        .submit-data                            
                           input(type="hidden" name="go_ticket_id" value=go_ticket.ticket_id)
                           input(type="hidden" name="return_ticket_id" value=return_ticket.ticket_id)
-                          input(type="hidden" name="passenger" value=passenger)              
-                        .submit-data                          
-                            button#submit(type='submit') CHECK OUT
+                          input(type="hidden" name="passenger" value=passenger)                                                                                        
+                          button#submit(type='submit') CHECK OUT
         .summary-ticket
             .summary-trip
                 .schedule-trip
