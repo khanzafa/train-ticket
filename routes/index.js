@@ -1,18 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const session = require('express-session');
 const bcrypt = require('bcrypt');
 const { where } = require('sequelize');
 
-router.use(session({
-  secret:'v654h6cv5oi2435xuu',
-  resave:false,
-  saveUninitialized:false
-}));
-
 /* Tampilan Beranda */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('landing');
 });
 
 /* Tampilan Login */
@@ -25,8 +18,7 @@ router.post('/login', async(req, res) => {
     const {email, password} = req.body;    
     const User = req.app.get('User');
     const user = await User.findOne({where:{email}});
-    
-    //User not found
+        
     if(!user){
       return res.status(404).json({message:'User tidak ditemukan'});
     }    
@@ -35,13 +27,10 @@ router.post('/login', async(req, res) => {
         console.error('Error comparing passwords:', err);
         return res.status(500).json({message: 'Error comparing passwords'});
       }
-      if(result){
-        //Login berhasil
-        req.session.user = user;
-        res.redirect("/booking");
-        //return res.status(200).json({message:'Login berhasil'});
-      }else{
-        //Invalid password   
+      if(result){        
+        req.session.user = user;                
+        res.redirect("/searching");        
+      }else{        
         return res.status(401).json({message:'Password tidak cocok'});        
       }
     });
@@ -68,14 +57,8 @@ router.post('/register', async (req, res)=>{
   }
 });
 
-/* Proses Logout */
-router.get('/logout', function(req, res, next) {
-  req.session.destroy();
-  res.redirect('/login');
-});
 
-
-router.get('/searching', function (req, res, next){
+router.get('/searching', function (req, res, next){  
   res.render('searching');
 });
 router.post('/searching-go', async (req, res) => {
@@ -170,7 +153,7 @@ router.post('/booking-return', async (req, res) => {
     const Ticket = req.app.get("Ticket");
     const Train = req.app.get("Train");    
     
-    const go_ticket = await Ticket.findOne({where: {ticket_id: go_ticket_id}})
+    const go_ticket = await Ticket.findOne({where: {ticket_id: go_ticket_id}});
     const return_ticket = await Ticket.findOne({ where: { ticket_id: return_ticket_id } });    
     const return_train = await Train.findOne({ where: { train_name } });        
 
@@ -183,10 +166,47 @@ router.post('/booking-return', async (req, res) => {
 
 
 router.post('/checkout', async (req, res) => {
-  try{    
-    // const { ticket_id, train_name, departure_station, arrival_station, departure_date, passenger } = req.session.bookingData;
-    const passengerData = req.body;
-    res.json(passengerData);
+  try {
+    const { passenger } = req.body; // Assuming you have a field named "passenger" that indicates the number of passengers
+    const user = req.session.user;
+    console.log(user.user_id);  
+    const Passenger = req.app.get("Passenger");
+    const Booking = req.app.get("Booking");
+    const Ticket = req.app.get("Ticket");
+    const go_ticket = await Ticket.findOne({
+      where: {ticket_id : req.body.go_ticket_id}
+    });
+    const return_ticket = await Ticket.findOne({
+      where: {ticket_id : req.body.return_ticket_id}
+    });
+    for (let num = 1; num <= passenger; num++) {
+      // const { fullname, title, type_id, passenger_id, phone_number, email } = req.body;      
+      // Create a new passenger in the database
+      const passenger = await Passenger.create({
+        fullname: req.body['fullname' + num],
+        title: req.body['title' + num],
+        type_id: req.body['type_id' + num],
+        passenger_id: req.body['passenger_id' + num],
+        phone_number: req.body['phone_number' + num],
+        email: req.body['email' + num],
+      });
+      await Booking.create({
+        user_id: user.user_id,
+        ticket_id: go_ticket.ticket_id,
+        passenger_id: passenger.passenger_id,
+        payment_status: 'PAID'
+      });
+      if(return_ticket){
+        await Booking.create({
+          user_id: user.user_id,
+          ticket_id: return_ticket.ticket_id,
+          passenger_id: passenger.passenger_id,
+          payment_status: 'PAID'
+        });
+      }      
+    }
+    // const Bookings = await Booking.findAll
+    res.render('e-ticket');
   }catch(err){
     console.error('Error retrieving train tickets: ', err);
     res.status(500).send('Error retrieving train tickets');
@@ -194,12 +214,16 @@ router.post('/checkout', async (req, res) => {
 });
 
 
-router.get('/', function(req, res, next){
-  res.render('landing');
+router.get('/dashboard', function(req, res, next){
+  const user = req.session.user;
+  console.log(user.user_id);
+  res.render('dashboard');  
 });
 
-router.get('/dashboard', function(req, res, next){
-  res.render('dashboard');
+/* Proses Logout */
+router.get('/logout', function(req, res, next) {
+  req.session.destroy();
+  res.redirect('/login');
 });
 
 module.exports = router;

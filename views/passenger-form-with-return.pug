@@ -55,7 +55,7 @@ html(lang='en')
                         .icon-people
                             i.fa-solid.fa-user
                         h1 Passenger Details            
-                        - for (var num = 1; num <= 2; num++)
+                        - for (var num = 1; num <= passenger; num++)
                             .head-form Passenger #{num}
                             .form-input.fullname
                             .field
@@ -70,17 +70,17 @@ html(lang='en')
                                 i.fa-solid.fa-chevron-down
                             .form-input.type-id
                             .field
-                                input#type-id.input(type='text' name='type-id' + num, autocomplete='off' placeholder='Identity')
+                                input#type-id.input(type='text' name='type_id' + num, autocomplete='off' placeholder='Identity')
                                 .list
-                                    .item(name='type-id' + num, value='ID') ID
-                                    .item(name='type-id' + num, value='Paspor') Paspor                
+                                    .item(name='type_id' + num, value='ID') ID
+                                    .item(name='type_id' + num, value='Paspor') Paspor                
                                 i.fa-solid.fa-chevron-down
                             .form-input.identity
                             .field
-                                input#identity(name='identity' + num, type='number', autocomplete='off' placeholder='ID Number')                
+                                input#identity(name='passenger_id' + num, type='number', autocomplete='off' placeholder='Identity Number')                
                             .form-input.phone
                             .field
-                                input#number-phone(type='text', name='number-phone' + num, autocomplete='off' placeholder='Mobile Number')                
+                                input#number-phone(type='text', name='phone_number' + num, autocomplete='off' placeholder='Mobile Number')                
                             .form-input.email
                             .field
                                 input#email(type='email', name='email' + num, autocomplete='off' placeholder='Email')              
@@ -98,7 +98,11 @@ html(lang='en')
                             | By clicking the button, you have agreed to PT. Train Venture 
                             span Terms &amp; Conditions
                             | .
-                        .submit-data
+                        form(action="checkout", method="post")  
+                          input(type="hidden" name="go_ticket_id" value=go_ticket.ticket_id)
+                          input(type="hidden" name="return_ticket_id" value=return_ticket.ticket_id)
+                          input(type="hidden" name="passenger" value=passenger)                                                                
+                        .submit-data                        
                             button#submit(type='submit') CHECK OUT
         .summary-ticket
           .summary-trip

@@ -11,6 +11,12 @@ var app = express();
 const {Sequelize, DataTypes} = require('sequelize');
 const session = require('express-session');
 
+app.use(session({
+  secret:'v654h6cv5oi2435xuu',
+  resave:false,
+  saveUninitialized:true
+}));
+
 // Konfigurasi koneksi database
 const sequelize = new Sequelize('ticket', 'khanza', 'tiwiCute04', {
   host: 'localhost',
@@ -151,6 +157,37 @@ const Train = sequelize.define("Train", {
   timestamps:false,
 });
 
+//MODEL PASSENGER
+const Passenger = sequelize.define('Passenger', {
+  passenger_id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    allowNull: false,
+  },
+  type_id: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  fullname: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  title: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  phone_number: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+  },
+}, {  
+  timestamps: false
+});
+
 //MODEL BOOKING
 const Booking = sequelize.define("Booking", {
   booking_id: {
@@ -171,18 +208,18 @@ const Booking = sequelize.define("Booking", {
     type: DataTypes.NUMBER,
     allowNull: false,
     references: {
-      model: 'Tickets',
+      model: 'Ticket',
       key: 'ticket_id'
     }
   },
-  passenger: {
-    type: DataTypes.NUMBER,
-    allowNull: false
-  },
-  booking_date: {
-    type: DataTypes.DATEONLY,
-    allowNull: false    
-  },
+  passenger_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: {
+      model: 'Passenger',
+      key: 'passenger_id'
+    }
+  },  
   payment_status: {
     type: DataTypes.ENUM('PENDING', 'PAID'),
     allowNull: false    
@@ -249,8 +286,9 @@ app.use(function(err, req, res, next) {
 });
 
 app.set('User', User);
-app.set('Ticket', Ticket);
 app.set('Train', Train);
 app.set('Station', Station);
+app.set('Ticket', Ticket);
+app.set('Passenger', Passenger);
 app.set('Booking', Booking);
 module.exports = app;
